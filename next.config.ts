@@ -1,9 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
+  output: "export",
+  trailingSlash: true,
+  images: { unoptimized: true },
+  transpilePackages: ["three", "@react-three/fiber", "@react-three/drei"],
+  // basePath: "/portfolio", // Uncomment and adjust for GitHub Pages subpath deployment
   turbopack: {
     rules: {
       "*.css": {

@@ -1,36 +1,158 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cosmic Frontier — Personal Portfolio Website
 
-## Getting Started
+A stunning, space-themed personal portfolio website built with Next.js, TypeScript, and Tailwind CSS. Designed for SEO specialists, web developers, and technology enthusiasts.
 
-First, run the development server:
+> **Theme:** _Cosmic Frontier — Exploring the Digital Universe_
+
+## ✨ Features
+
+- **9 Sections**: Hero, About Me, Professional Journey, Featured Projects, Technical Skills, Certifications, Education & Achievements, Contact, Footer
+- **Cosmic Theme**: Animated starfield background, nebula effects, orbit grids, HUD-styled panels
+- **Interactive**: Client-side project filtering, active nav tracking, mobile overlay menu, scroll-to-top
+- **Responsive**: Optimized for mobile (360px+), tablet, and desktop
+- **Accessible**: Skip-to-content link, keyboard navigation, `prefers-reduced-motion` support, focus indicators
+- **SEO Ready**: Metadata, Open Graph, semantic HTML, `robots.txt`, `sitemap.xml`, custom 404
+- **Data-Driven**: All content managed via TypeScript files in `src/data/`
+- **Static Export**: Deployed as pure static HTML via GitHub Pages
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Node.js 20+
+- npm
+
+### Development
 
 ```bash
+# Install dependencies
+npm install
+
+# Start dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# Production build (static export)
+npm run build
 
-## Learn More
+# Output folder: ./out
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 📝 Updating Content
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+All content is managed through TypeScript files in `src/data/`:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| File | Content |
+|------|---------|
+| `profile.ts` | Name, headline, subtitle, summary, CV path |
+| `experience.ts` | Work experience entries |
+| `projects.ts` | Featured projects with categories |
+| `skills.ts` | Technical skills by category |
+| `certifications.ts` | Professional certifications |
+| `education.ts` | Education and achievements |
+| `socials.ts` | Social media links |
 
-## Deploy on Vercel
+### Adding a New Project
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Edit `src/data/projects.ts` and add an entry:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```ts
+{
+  slug: "my-project",
+  title: "My New Project",
+  category: "web", // "seo" | "web" | "mobile" | "edtech" | "ai"
+  year: 2024,
+  summary: "Brief description",
+  role: "Developer",
+  problem: "What problem it solved",
+  outcome: "What was achieved",
+  tech: ["Next.js", "TypeScript"],
+  thumbnail: "/images/projects/my-project.webp",
+  thumbnailAlt: "Description of thumbnail",
+  featured: true,
+}
+```
+
+### Updating CV
+
+Replace `public/documents/cv.pdf` with your latest CV file.
+
+## 🎨 Design System
+
+### Color Palette
+
+| Role | Hex |
+|------|-----|
+| Background | `#050816` |
+| Surface/Card | `#111A33` |
+| Primary Accent | `#8B5CF6` |
+| Secondary Accent | `#38BDF8` |
+| Highlight | `#A3E635` |
+| Primary Text | `#F8FAFC` |
+| Secondary Text | `#94A3B8` |
+
+### Typography
+
+- **Display**: Outfit (headings)
+- **Body**: Inter (paragraphs, navigation)
+- **Mono**: JetBrains Mono (labels, badges)
+
+## 🏗 Project Structure
+
+```
+├── public/
+│   ├── documents/cv.pdf
+│   ├── images/projects/
+│   ├── robots.txt
+│   └── sitemap.xml
+├── src/
+│   ├── app/
+│   │   ├── globals.css        # Design system & theme
+│   │   ├── layout.tsx         # Root layout with fonts & metadata
+│   │   ├── page.tsx           # Main page assembling all sections
+│   │   └── not-found.tsx      # Custom 404 page
+│   ├── components/
+│   │   ├── effects/           # Starfield canvas
+│   │   ├── layout/            # Navbar, Footer
+│   │   ├── sections/          # Hero, About, Experience, Projects, Skills, etc.
+│   │   └── ui/                # Social icons
+│   ├── data/                  # Content data files
+│   ├── hooks/                 # useReveal animation hook
+│   └── lib/utils.ts           # Helper functions
+├── .github/workflows/deploy.yml
+├── next.config.ts
+├── postcss.config.mjs
+└── package.json
+```
+
+## 🚢 Deployment (GitHub Pages)
+
+1. Push to the `main` branch
+2. GitHub Actions installs deps, builds, and deploys
+3. Static export (`out/`) is published to GitHub Pages
+
+### For repository subpath (`username.github.io/portfolio/`):
+
+Uncomment and set `basePath` in `next.config.ts`:
+
+```ts
+basePath: "/portfolio",
+```
+
+## 📋 Tech Stack
+
+- **Next.js 16** (App Router, Static Export)
+- **TypeScript**
+- **Tailwind CSS v4**
+- **Lucide React** (icons)
+- **GitHub Actions** (CI/CD)
+- **GitHub Pages** (hosting)
+
+## 📄 License
+
+This project is for personal portfolio use. All content and design are original.
