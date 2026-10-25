@@ -1,6 +1,6 @@
 import type { NextConfig } from "next";
 
-const basePath = process.env.GITHUB_ACTIONS === "true" ? "/web-porto" : "";
+const basePath = "";
 
 const nextConfig: NextConfig = {
   output: "export",

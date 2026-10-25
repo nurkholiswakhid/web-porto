@@ -136,11 +136,11 @@ Replace `public/documents/cv.pdf` with your latest CV file.
 2. GitHub Actions installs deps, builds, and deploys
 3. Static export (`out/`) is published to GitHub Pages
 
-### For repository subpath
+### Custom domain
 
-The GitHub Actions build automatically uses `/web-porto` as the Next.js
-`basePath`. Local development keeps the root path, so `npm run dev` remains
-available at `http://localhost:3000`.
+The site is configured for `https://nurkholiswakhid.me` and uses the root path
+for assets and navigation. The `public/CNAME` file preserves the custom domain
+when GitHub Pages deploys a new build.
 
 ## 📋 Tech Stack
 
