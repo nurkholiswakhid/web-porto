@@ -3,7 +3,7 @@
  * Ensures all paths work correctly on GitHub Pages subpath deployments.
  */
 export function assetPath(path: string): string {
-  const basePath = process.env.__NEXT_ROUTER_BASEPATH || "";
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
   const cleanPath = path.startsWith("/") ? path : `/${path}`;
   return `${basePath}${cleanPath}`;
 }

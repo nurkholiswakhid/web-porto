@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://username.github.io/portfolio/sitemap.xml
+Sitemap: https://nurkholiswakhid.github.io/web-porto/sitemap.xml

@@ -136,13 +136,11 @@ Replace `public/documents/cv.pdf` with your latest CV file.
 2. GitHub Actions installs deps, builds, and deploys
 3. Static export (`out/`) is published to GitHub Pages
 
-### For repository subpath (`username.github.io/portfolio/`):
+### For repository subpath
 
-Uncomment and set `basePath` in `next.config.ts`:
-
-```ts
-basePath: "/portfolio",
-```
+The GitHub Actions build automatically uses `/web-porto` as the Next.js
+`basePath`. Local development keeps the root path, so `npm run dev` remains
+available at `http://localhost:3000`.
 
 ## 📋 Tech Stack
 
