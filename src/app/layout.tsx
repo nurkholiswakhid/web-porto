@@ -17,9 +17,6 @@ export const metadata: Metadata = {
     "Portfolio",
   ],
   authors: [{ name: "Nur Kholis Wakhid" }],
-  icons: {
-    icon: "/iconnn.png",
-  },
   openGraph: {
     title: "Nur Kholis Wakhid — Portfolio Cosmic Frontier",
     description:
@@ -39,7 +36,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+    >
+      <head>
+        <link rel="icon" href="/iconnn.ico" sizes="any" />
+      </head>
       <body className="font-body antialiased">
         {/* Skip to content link for accessibility */}
         <a href="#main-content" className="skip-link">
