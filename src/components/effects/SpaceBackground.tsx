@@ -4,26 +4,46 @@ import { useRef, useMemo, useEffect, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
-function seededValue(index: number): number {
-  return Math.sin(index * 12.9898) * 0.5 + 0.5;
+function seededValue(index: number, salt: number): number {
+  const value = Math.sin(index * 127.1 + salt * 311.7) * 43758.5453;
+  return value - Math.floor(value);
 }
 
 /** Procedural starfield particles with parallax depth */
 function Stars({ count = 1200 }: { count?: number }) {
   const meshRef = useRef<THREE.Points>(null);
+  const materialRef = useRef<THREE.ShaderMaterial>(null);
   const mouseRef = useRef({ x: 0, y: 0 });
 
-  const [positions, sizes] = useMemo(() => {
+  const [positions, sizes, phases, colors, velocities] = useMemo(() => {
     const pos = new Float32Array(count * 3);
     const sz = new Float32Array(count);
+    const phase = new Float32Array(count);
+    const color = new Float32Array(count * 3);
+    const velocity = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
-      pos[i * 3] = (seededValue(i * 4) - 0.5) * 80;
-      pos[i * 3 + 1] = (seededValue(i * 4 + 1) - 0.5) * 50;
-      pos[i * 3 + 2] = (seededValue(i * 4 + 2) - 0.5) * 40 - 8;
-      sz[i] = seededValue(i * 4 + 3) * 0.8 + 0.15;
+      const x = seededValue(i, 1) * 100 - 50;
+      const y = seededValue(i, 2) * 64 - 32;
+      const z = seededValue(i, 3) * 44 - 30;
+      pos[i * 3] = x;
+      // Independent jitter prevents visible horizontal or vertical rows.
+      pos[i * 3 + 1] = y + Math.sin(x * 0.37 + i * 1.91) * 1.5;
+      pos[i * 3 + 2] = z;
+      sz[i] = seededValue(i, 4) * 1.4 + 0.35;
+      phase[i] = seededValue(i, 5) * Math.PI * 2;
+      velocity[i * 3] = (seededValue(i, 6) - 0.5) * 0.18;
+      velocity[i * 3 + 1] = seededValue(i, 7) * 0.24 + 0.08;
+      velocity[i * 3 + 2] = (seededValue(i, 8) - 0.5) * 0.04;
+
+      const tint = seededValue(i, 9);
+      color[i * 3] = tint > 0.86 ? 0.78 : 0.91;
+      color[i * 3 + 1] = tint > 0.86 ? 1 : 0.95;
+      color[i * 3 + 2] = tint > 0.86 ? 0 : 0.88;
     }
-    return [pos, sz];
+    return [pos, sz, phase, color, velocity];
   }, [count]);
+  const positionsRef = useRef(positions);
+  const velocitiesRef = useRef(velocities);
 
   useEffect(() => {
     const handleMouse = (e: MouseEvent) => {
@@ -34,16 +54,37 @@ function Stars({ count = 1200 }: { count?: number }) {
     return () => window.removeEventListener("mousemove", handleMouse);
   }, []);
 
-  useFrame((_, delta) => {
+  useFrame(({ clock }, delta) => {
     if (!meshRef.current) return;
-    // Subtle drift
-    meshRef.current.rotation.y += delta * 0.008;
-    meshRef.current.rotation.x += delta * 0.003;
+    if (materialRef.current) {
+      materialRef.current.uniforms.uTime.value = clock.getElapsedTime();
+    }
+
+    // Move and wrap each particle so the field stays full forever.
+    const currentPositions = positionsRef.current;
+    const currentVelocities = velocitiesRef.current;
+    for (let i = 0; i < count; i++) {
+      const index = i * 3;
+      currentPositions[index] += currentVelocities[index] * delta;
+      currentPositions[index + 1] += currentVelocities[index + 1] * delta;
+      currentPositions[index + 2] += currentVelocities[index + 2] * delta;
+
+      if (currentPositions[index] > 50) currentPositions[index] = -50;
+      if (currentPositions[index] < -50) currentPositions[index] = 50;
+      if (currentPositions[index + 1] > 32) currentPositions[index + 1] = -32;
+      if (currentPositions[index + 1] < -32) currentPositions[index + 1] = 32;
+      if (currentPositions[index + 2] > 14) currentPositions[index + 2] = -30;
+      if (currentPositions[index + 2] < -30) currentPositions[index + 2] = 14;
+    }
+
+    const positionAttribute = meshRef.current.geometry.attributes.position;
+    positionAttribute.needsUpdate = true;
+
     // Mouse parallax
     meshRef.current.position.x +=
-      (mouseRef.current.x * -0.3 - meshRef.current.position.x) * delta * 1.5;
+      (mouseRef.current.x * -0.5 - meshRef.current.position.x) * delta * 1.5;
     meshRef.current.position.y +=
-      (mouseRef.current.y * 0.2 - meshRef.current.position.y) * delta * 1.5;
+      (mouseRef.current.y * 0.35 - meshRef.current.position.y) * delta * 1.5;
   });
 
   return (
@@ -59,35 +100,52 @@ function Stars({ count = 1200 }: { count?: number }) {
           args={[sizes, 1]}
           count={count}
         />
+        <bufferAttribute
+          attach="attributes-phase"
+          args={[phases, 1]}
+          count={count}
+        />
+        <bufferAttribute
+          attach="attributes-color"
+          args={[colors, 3]}
+          count={count}
+        />
       </bufferGeometry>
       <shaderMaterial
+        ref={materialRef}
         transparent
         depthWrite={false}
         blending={THREE.AdditiveBlending}
         uniforms={{
-          uColor: { value: new THREE.Color("#e8e4df") },
-          uOpacity: { value: 0.5 },
+          uTime: { value: 0 },
+          uOpacity: { value: 0.62 },
         }}
         vertexShader={`
           attribute float size;
-          varying float vSize;
+          attribute float phase;
+          attribute vec3 color;
+          varying float vPhase;
+          varying vec3 vColor;
           void main() {
-            vSize = size;
+            vPhase = phase;
+            vColor = color;
             vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-            gl_PointSize = size * (200.0 / -mvPosition.z);
+            gl_PointSize = clamp(size * (240.0 / -mvPosition.z), 1.0, 7.0);
             gl_Position = projectionMatrix * mvPosition;
           }
         `}
         fragmentShader={`
-          uniform vec3 uColor;
+          uniform float uTime;
           uniform float uOpacity;
-          varying float vSize;
+          varying float vPhase;
+          varying vec3 vColor;
           void main() {
             float dist = length(gl_PointCoord - vec2(0.5));
             if (dist > 0.5) discard;
-            float alpha = smoothstep(0.5, 0.0, dist) * uOpacity;
-            // Larger stars get a subtle warm tint
-            vec3 col = mix(uColor, vec3(0.78, 1.0, 0.0), step(1.2, vSize) * 0.15);
+            float twinkle = 0.72 + 0.28 * sin(uTime * 1.8 + vPhase);
+            float glow = smoothstep(0.5, 0.0, dist);
+            float alpha = glow * uOpacity * twinkle;
+            vec3 col = vColor;
             gl_FragColor = vec4(col, alpha);
           }
         `}
@@ -109,7 +167,7 @@ function SceneContent() {
   return (
     <>
       <TransparentScene />
-      <Stars count={800} />
+      <Stars count={650} />
       {/* Dim ambient */}
       <ambientLight intensity={0.02} />
     </>

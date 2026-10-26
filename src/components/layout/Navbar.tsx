@@ -107,28 +107,31 @@ export default function Navbar() {
         aria-hidden="true"
       />
 
-      {/* Main Navigation Bar — Lando-style minimal */}
+      {/* Floating Navigation Bar */}
       <header
-        className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-          isScrolled
-            ? "bg-bg/90 backdrop-blur-xl border-b border-border"
-            : "bg-transparent"
-        )}
+        className="fixed top-3 sm:top-5 left-1/2 z-50 w-[calc(100%-1.5rem)] max-w-6xl -translate-x-1/2"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 sm:h-20">
+        <div
+          className={cn(
+            "rounded-2xl sm:rounded-full border px-3 sm:px-4 transition-all duration-300",
+            "bg-bg/75 backdrop-blur-xl shadow-[0_12px_40px_rgba(0,0,0,0.28)]",
+            isScrolled
+              ? "border-accent/25 shadow-[0_12px_40px_rgba(0,0,0,0.4)]"
+              : "border-border/80"
+          )}
+        >
+          <div className="flex items-center justify-between min-h-14 sm:min-h-16 gap-3">
             {/* Logo — Lando-style bold name wordmark */}
             <button
               onClick={scrollToTop}
-              className="flex items-center whitespace-nowrap leading-none cursor-pointer group"
+              className="flex items-center whitespace-nowrap leading-none cursor-pointer group shrink-0"
               aria-label="Scroll to top"
               data-cursor="HOME"
             >
-              <span className="font-display font-black text-base sm:text-lg tracking-tight text-foreground">
+              <span className="font-display font-black text-sm sm:text-lg tracking-tight text-foreground">
                 NUR KHOLIS
               </span>
-              <span className="font-display font-black text-base sm:text-lg tracking-tight text-accent ml-1">
+              <span className="font-display font-black text-sm sm:text-lg tracking-tight text-accent ml-1">
                 WAKHID
               </span>
             </button>
@@ -141,9 +144,9 @@ export default function Navbar() {
                   onClick={() => handleNavClick(item.href)}
                   onMouseEnter={() => soundFx.playHover()}
                   className={cn(
-                    "px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 relative cursor-pointer",
+                    "px-3 py-2 rounded-full text-sm font-medium transition-all duration-200 relative cursor-pointer",
                     activeSection === item.href.replace("#", "")
-                      ? "text-accent"
+                      ? "text-accent bg-accent/10"
                       : "text-text-secondary hover:text-foreground"
                   )}
                 >
@@ -161,7 +164,7 @@ export default function Navbar() {
               <button
                 onClick={toggleSound}
                 className={cn(
-                  "p-2 rounded-lg border transition-all cursor-pointer hidden sm:flex items-center",
+                  "p-2 rounded-full border transition-all cursor-pointer hidden sm:flex items-center",
                   soundEnabled
                     ? "bg-accent/15 border-accent/40 text-accent"
                     : "border-border text-text-dim hover:text-foreground"
@@ -181,7 +184,7 @@ export default function Navbar() {
                   soundFx.playModeSwitch();
                   setIsMenuOpen(!isMenuOpen);
                 }}
-                className="flex items-center gap-2 px-3 py-2 rounded-lg border border-border bg-surface/60 hover:border-accent hover:bg-accent/10 text-foreground transition-all duration-300 cursor-pointer lg:hidden"
+                className="flex items-center gap-2 px-3 py-2 rounded-full border border-border bg-surface/60 hover:border-accent hover:bg-accent/10 text-foreground transition-all duration-300 cursor-pointer lg:hidden"
                 aria-label={isMenuOpen ? "Close menu" : "Open menu"}
               >
                 {isMenuOpen ? (
@@ -225,7 +228,7 @@ export default function Navbar() {
 
           {/* Giant Typography Links */}
           <div className="flex flex-col gap-2 my-auto py-8">
-            {NAV_ITEMS.map((item, i) => (
+            {NAV_ITEMS.map((item) => (
               <button
                 key={item.href}
                 onClick={() => handleNavClick(item.href)}

@@ -23,15 +23,32 @@ export default function MarqueeText({
 
     let animId: number;
     const offsets = lines.map(() => 0);
+    const initialized = lines.map(() => false);
     const speeds = lines.map((_, i) => (i % 2 === 0 ? speed : -speed));
 
     const tick = () => {
       trackRefs.current.forEach((track, i) => {
         if (!track) return;
+
+        const firstItem = track.firstElementChild;
+        if (!(firstItem instanceof HTMLElement)) return;
+
+        const loopWidth =
+          firstItem.getBoundingClientRect().width +
+          parseFloat(getComputedStyle(firstItem).marginRight || "0");
+        if (!loopWidth) return;
+
+        if (!initialized[i]) {
+          // Start right-moving rows on the second copy to keep both edges filled.
+          offsets[i] = speeds[i] > 0 ? -loopWidth : 0;
+          initialized[i] = true;
+        }
+
         offsets[i] += speeds[i] * (1 / 60);
-        const trackWidth = track.scrollWidth / 2;
-        if (Math.abs(offsets[i]) >= trackWidth) {
-          offsets[i] = 0;
+        if (speeds[i] > 0 && offsets[i] >= 0) {
+          offsets[i] -= loopWidth;
+        } else if (speeds[i] < 0 && offsets[i] <= -loopWidth) {
+          offsets[i] += loopWidth;
         }
         track.style.transform = `translateX(${offsets[i]}px)`;
       });
@@ -81,7 +98,7 @@ export default function MarqueeText({
             {[0, 1].map((dup) => (
               <span
                 key={dup}
-                className="font-display font-black text-[clamp(3rem,8vw,8rem)] leading-[0.95] tracking-tight mr-8"
+                className="shrink-0 font-display font-black text-[clamp(3rem,8vw,8rem)] leading-[0.95] tracking-tight mr-8"
               >
                 {renderLine(line, i)}
                 <span className="text-border mx-6">✦</span>
