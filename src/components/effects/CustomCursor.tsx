@@ -19,10 +19,9 @@ export default function CustomCursor() {
     const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (isTouch || prefersReducedMotion) {
-      setIsEnabled(false);
       return;
     }
-    setIsEnabled(true);
+    const enableFrame = requestAnimationFrame(() => setIsEnabled(true));
 
     const handleMouseMove = (e: MouseEvent) => {
       targetPos.current = { x: e.clientX, y: e.clientY };
@@ -70,6 +69,7 @@ export default function CustomCursor() {
       window.removeEventListener("mouseup", handleMouseUp);
       document.removeEventListener("mouseleave", handleMouseLeave);
       if (requestRef.current) cancelAnimationFrame(requestRef.current);
+      cancelAnimationFrame(enableFrame);
     };
   }, [isVisible]);
 

@@ -50,9 +50,14 @@ export default function Navbar() {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    setSoundEnabled(soundFx.getEnabled());
-    return () => window.removeEventListener("scroll", handleScroll);
+    const frame = requestAnimationFrame(() => {
+      handleScroll();
+      setSoundEnabled(soundFx.getEnabled());
+    });
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, [handleScroll]);
 
   // Lock body scroll when menu is open

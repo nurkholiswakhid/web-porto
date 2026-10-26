@@ -4,6 +4,10 @@ import { useRef, useMemo, useEffect, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
+function seededValue(index: number): number {
+  return Math.sin(index * 12.9898) * 0.5 + 0.5;
+}
+
 /** Procedural starfield particles with parallax depth */
 function Stars({ count = 1200 }: { count?: number }) {
   const meshRef = useRef<THREE.Points>(null);
@@ -13,10 +17,10 @@ function Stars({ count = 1200 }: { count?: number }) {
     const pos = new Float32Array(count * 3);
     const sz = new Float32Array(count);
     for (let i = 0; i < count; i++) {
-      pos[i * 3] = (Math.random() - 0.5) * 80;
-      pos[i * 3 + 1] = (Math.random() - 0.5) * 50;
-      pos[i * 3 + 2] = (Math.random() - 0.5) * 40 - 8;
-      sz[i] = Math.random() * 0.8 + 0.15;
+      pos[i * 3] = (seededValue(i * 4) - 0.5) * 80;
+      pos[i * 3 + 1] = (seededValue(i * 4 + 1) - 0.5) * 50;
+      pos[i * 3 + 2] = (seededValue(i * 4 + 2) - 0.5) * 40 - 8;
+      sz[i] = seededValue(i * 4 + 3) * 0.8 + 0.15;
     }
     return [pos, sz];
   }, [count]);
@@ -155,10 +159,13 @@ export default function SpaceBackground() {
   const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
-    setHasWebGL(isWebGLAvailable());
-    setReducedMotion(
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    );
+    const frame = requestAnimationFrame(() => {
+      setHasWebGL(isWebGLAvailable());
+      setReducedMotion(
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      );
+    });
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   if (!hasWebGL || reducedMotion) {
