@@ -29,9 +29,9 @@ export default function Footer() {
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           {/* Brand */}
           <div>
-            <div className="flex flex-col leading-none mb-3">
+            <div className="flex items-center whitespace-nowrap">
               <span className="font-display font-black text-lg text-foreground">NUR KHOLIS</span>
-              <span className="font-display font-black text-lg text-accent">WAKHID</span>
+              <span className="font-display font-black text-lg text-accent"> WAKHID</span>
             </div>
             <p className="text-sm text-text-secondary leading-relaxed max-w-xs">
               Full Stack Web Developer & SEO Specialist — Building digital solutions.
