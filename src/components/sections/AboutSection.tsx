@@ -100,11 +100,7 @@ export default function AboutSection() {
                     className="w-full h-full object-cover object-top scale-105 transition-transform duration-500 group-hover/avatar:scale-110"
                   />
                   {/* Wireframe helmet overlay */}
-                  <img
-                    src={assetPath("images/helmet_wireframe_opt.png")}
-                    alt="AR Helmet"
-                    className="absolute -top-1 left-1/2 -translate-x-1/2 w-24 h-24 object-contain opacity-30 group-hover/avatar:opacity-90 group-hover/avatar:-translate-y-1.5 transition-all duration-300 pointer-events-none filter drop-shadow-[0_0_6px_#C8FF00]"
-                  />
+                  
                   <div className="absolute top-1 right-1 z-10">
                     <Sparkles className="w-3 h-3 text-accent animate-pulse" />
                   </div>
