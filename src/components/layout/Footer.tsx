@@ -30,8 +30,12 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center whitespace-nowrap">
-              <span className="font-display font-black text-lg text-foreground">NUR KHOLIS </span>
-              <span className="font-display font-black text-lg text-accent">WAKHID</span>
+              <span className="font-display font-black text-lg text-foreground">
+                NUR KHOLIS
+              </span>
+              <span className="font-display font-black text-lg text-accent ml-1">
+                WAKHID
+              </span>
             </div>
             <p className="text-sm text-text-secondary leading-relaxed max-w-xs">
               Full Stack Web Developer & SEO Specialist — Building digital solutions.
