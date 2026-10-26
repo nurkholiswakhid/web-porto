@@ -121,14 +121,14 @@ export default function Navbar() {
             {/* Logo — Lando-style bold name wordmark */}
             <button
               onClick={scrollToTop}
-              className="flex flex-col leading-none cursor-pointer group"
+              className="flex items-center whitespace-nowrap leading-none cursor-pointer group"
               aria-label="Scroll to top"
               data-cursor="HOME"
             >
               <span className="font-display font-black text-base sm:text-lg tracking-tight text-foreground">
                 NUR KHOLIS
               </span>
-              <span className="font-display font-black text-base sm:text-lg tracking-tight text-accent">
+              <span className="font-display font-black text-base sm:text-lg tracking-tight text-accent ml-1">
                 WAKHID
               </span>
             </button>
