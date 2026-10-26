@@ -40,7 +40,7 @@ export default function RootLayout({
       lang="en"
     >
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/iconnn.png" sizes="any" />
       </head>
       <body className="font-body antialiased">
         {/* Skip to content link for accessibility */}

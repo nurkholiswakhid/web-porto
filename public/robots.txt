@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://nurkholiswakhid.github.io/web-porto/sitemap.xml
+Sitemap: https://www.nurkholiswakhid.me/sitemap.xml
