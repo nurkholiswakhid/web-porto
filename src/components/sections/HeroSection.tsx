@@ -12,6 +12,8 @@ import { soundFx } from "@/lib/audio";
 export default function HeroSection() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const visualRef = useRef<HTMLDivElement>(null);
+  const helmetCanvasRef = useRef<HTMLCanvasElement>(null);
 
   // Entrance reveal
   useEffect(() => {
@@ -23,6 +25,324 @@ export default function HeroSection() {
       prefersReducedMotion ? 0 : 200
     );
     return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const visual = visualRef.current;
+    const canvas = helmetCanvasRef.current;
+    if (!visual || !canvas) return;
+    const context = canvas.getContext("2d");
+    if (!context) return;
+    const trailCanvas = document.createElement("canvas");
+    const trailContext = trailCanvas.getContext("2d");
+    if (!trailContext) return;
+
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    const helmetImage = new Image();
+    const cursor = { x: 50, y: 42, radius: 0 };
+    const target = { x: 50, y: 42, radius: 0 };
+    const canvasSize = { width: 0, height: 0 };
+    let needsRender = true;
+    let previousX = 0;
+    let previousY = 0;
+    let velocity = 0;
+    let pointerInside = false;
+    let animationFrame = 0;
+    let lastFrameTime = performance.now();
+    let activeSegment = -1;
+    const segmentColumns = 8;
+    const segmentRows = 6;
+    const segments = Array.from(
+      { length: segmentColumns * segmentRows },
+      () => ({
+        points: [] as Array<{ x: number; y: number; radius: number }>,
+        fadeStartedAt: 0,
+      })
+    );
+    let resizeObserver: ResizeObserver | null = null;
+    const trailDuration = 500;
+
+    const resizeCanvas = () => {
+      const bounds = visual.getBoundingClientRect();
+      const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      canvasSize.width = Math.max(1, bounds.width);
+      canvasSize.height = Math.max(1, bounds.height);
+      canvas.width = Math.round(canvasSize.width * ratio);
+      canvas.height = Math.round(canvasSize.height * ratio);
+      trailCanvas.width = canvas.width;
+      trailCanvas.height = canvas.height;
+      context.setTransform(ratio, 0, 0, ratio, 0, 0);
+      trailContext.setTransform(ratio, 0, 0, ratio, 0, 0);
+      trailContext.clearRect(0, 0, canvasSize.width, canvasSize.height);
+      needsRender = true;
+    };
+
+    const drawTrailPoint = (
+      xPercent: number,
+      yPercent: number,
+      radius: number,
+      opacity = 1
+    ) => {
+      const x = (xPercent / 100) * canvasSize.width;
+      const y = (yPercent / 100) * canvasSize.height;
+      const gradient = trailContext.createRadialGradient(
+        x,
+        y,
+        radius * 0.55,
+        x,
+        y,
+        radius
+      );
+      gradient.addColorStop(0, "rgba(0, 0, 0, 1)");
+      gradient.addColorStop(0.72, "rgba(0, 0, 0, 0.92)");
+      gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
+      trailContext.save();
+      trailContext.globalCompositeOperation = "source-over";
+      trailContext.globalAlpha = opacity;
+      trailContext.fillStyle = gradient;
+      trailContext.beginPath();
+      trailContext.arc(x, y, radius, 0, Math.PI * 2);
+      trailContext.fill();
+      trailContext.restore();
+    };
+
+    const getSegmentIndex = (x: number, y: number) => {
+      const column = Math.min(
+        segmentColumns - 1,
+        Math.max(0, Math.floor((x / 100) * segmentColumns))
+      );
+      const row = Math.min(
+        segmentRows - 1,
+        Math.max(0, Math.floor((y / 100) * segmentRows))
+      );
+      return row * segmentColumns + column;
+    };
+
+    const triggerSegmentFade = (segmentIndex: number, timestamp: number) => {
+      const segment = segments[segmentIndex];
+      if (segment.fadeStartedAt === 0 && segment.points.length > 0) {
+        segment.fadeStartedAt = timestamp;
+      }
+    };
+
+    const hasActiveFade = () =>
+      segments.some((segment) => segment.fadeStartedAt > 0);
+
+    const redrawTrail = (now: number) => {
+      trailContext.clearRect(0, 0, canvasSize.width, canvasSize.height);
+      segments.forEach((segment) => {
+        if (segment.fadeStartedAt === 0) {
+          segment.points.forEach((point) =>
+            drawTrailPoint(point.x, point.y, point.radius)
+          );
+          return;
+        }
+        const elapsed = now - segment.fadeStartedAt;
+        if (elapsed >= trailDuration) {
+          segment.points = [];
+          segment.fadeStartedAt = 0;
+          return;
+        }
+        const stepDelay =
+          segment.points.length > 1
+            ? (trailDuration * 0.35) / (segment.points.length - 1)
+            : 0;
+        const fadeDuration = trailDuration * 0.65;
+        segment.points.forEach((point, index) => {
+          const progress = Math.max(
+            0,
+            Math.min(1, (elapsed - index * stepDelay) / fadeDuration)
+          );
+          const easedProgress = progress * progress * (3 - 2 * progress);
+          drawTrailPoint(point.x, point.y, point.radius, 1 - easedProgress);
+        });
+      });
+    };
+
+    const render = () => {
+      const now = performance.now();
+      const deltaTime = Math.min(now - lastFrameTime, 50);
+      lastFrameTime = now;
+      const smoothing = reducedMotion
+        ? 1
+        : 1 - Math.exp(-deltaTime / 110);
+      cursor.x += (target.x - cursor.x) * smoothing;
+      cursor.y += (target.y - cursor.y) * smoothing;
+      cursor.radius += (target.radius - cursor.radius) * smoothing;
+
+      const hasMotion =
+        Math.abs(target.x - cursor.x) > 0.01 ||
+        Math.abs(target.y - cursor.y) > 0.01 ||
+        Math.abs(target.radius - cursor.radius) > 0.01;
+      if (needsRender || hasMotion) {
+        context.clearRect(0, 0, canvasSize.width, canvasSize.height);
+        if (helmetImage.complete && helmetImage.naturalWidth > 0) {
+          context.drawImage(
+            helmetImage,
+            0,
+            0,
+            canvasSize.width,
+            canvasSize.height
+          );
+          if (pointerInside || hasActiveFade()) {
+            context.save();
+            context.globalCompositeOperation = "destination-out";
+            redrawTrail(now);
+            context.globalAlpha = 1;
+            context.drawImage(
+              trailCanvas,
+              0,
+              0,
+              canvasSize.width,
+              canvasSize.height
+            );
+            if (pointerInside && cursor.radius > 0) {
+              context.globalAlpha = 1;
+              const x = (cursor.x / 100) * canvasSize.width;
+              const y = (cursor.y / 100) * canvasSize.height;
+              const gradient = context.createRadialGradient(
+                x,
+                y,
+                cursor.radius * 0.55,
+                x,
+                y,
+                cursor.radius
+              );
+              gradient.addColorStop(0, "rgba(0, 0, 0, 1)");
+              gradient.addColorStop(0.72, "rgba(0, 0, 0, 0.92)");
+              gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
+              context.fillStyle = gradient;
+              context.beginPath();
+              context.arc(x, y, cursor.radius, 0, Math.PI * 2);
+              context.fill();
+            }
+            context.restore();
+          }
+        }
+        needsRender = false;
+      }
+      if (
+        pointerInside ||
+        hasMotion ||
+        needsRender ||
+        hasActiveFade()
+      ) {
+        animationFrame = window.requestAnimationFrame(render);
+      } else {
+        animationFrame = 0;
+      }
+    };
+
+    const startRenderLoop = () => {
+      if (!animationFrame) {
+        animationFrame = window.requestAnimationFrame(render);
+      }
+    };
+
+    const handlePointerMove = (event: PointerEvent) => {
+      if (event.pointerType === "touch") return;
+      const bounds = visual.getBoundingClientRect();
+      const normalizedX = ((event.clientX - bounds.left) / bounds.width) * 100;
+      const normalizedY = ((event.clientY - bounds.top) / bounds.height) * 100;
+      const deltaX = normalizedX - previousX;
+      const deltaY = normalizedY - previousY;
+      const speed = Math.min(Math.sqrt(deltaX ** 2 + deltaY ** 2), 10);
+      velocity += (speed - velocity) * 0.18;
+
+      target.x = normalizedX;
+      target.y = normalizedY;
+      target.radius = 20 + velocity * 3;
+      const lastPoint = { x: previousX, y: previousY };
+      const distance = Math.hypot(
+        normalizedX - lastPoint.x,
+        normalizedY - lastPoint.y
+      );
+      if (distance > 0.6) {
+        const steps = Math.max(1, Math.ceil(distance / 0.6));
+        for (let step = 1; step <= steps; step += 1) {
+          const progress = step / steps;
+          const pointX =
+            lastPoint.x + (normalizedX - lastPoint.x) * progress;
+          const pointY =
+            lastPoint.y + (normalizedY - lastPoint.y) * progress;
+          const segmentIndex = getSegmentIndex(pointX, pointY);
+          if (activeSegment !== -1 && activeSegment !== segmentIndex) {
+            triggerSegmentFade(activeSegment, performance.now());
+          }
+          activeSegment = segmentIndex;
+          const segment = segments[segmentIndex];
+          const previousPoint = segment.points[segment.points.length - 1];
+          if (
+            !previousPoint ||
+            Math.hypot(pointX - previousPoint.x, pointY - previousPoint.y) > 0.4
+          ) {
+            segment.points.push({
+              x: pointX,
+              y: pointY,
+              radius: target.radius,
+            });
+            if (segment.points.length > 24) segment.points.shift();
+          }
+        }
+      }
+      const endpointSegment = getSegmentIndex(normalizedX, normalizedY);
+      if (activeSegment !== -1 && activeSegment !== endpointSegment) {
+        triggerSegmentFade(activeSegment, performance.now());
+      }
+      activeSegment = endpointSegment;
+      previousX = normalizedX;
+      previousY = normalizedY;
+      needsRender = true;
+      startRenderLoop();
+    };
+
+    const handlePointerEnter = (event: PointerEvent) => {
+      if (event.pointerType === "touch") return;
+      const bounds = visual.getBoundingClientRect();
+      previousX = ((event.clientX - bounds.left) / bounds.width) * 100;
+      previousY = ((event.clientY - bounds.top) / bounds.height) * 100;
+      velocity = 0;
+      pointerInside = true;
+      target.x = previousX;
+      target.y = previousY;
+      target.radius = 10;
+      activeSegment = getSegmentIndex(previousX, previousY);
+      needsRender = true;
+      startRenderLoop();
+    };
+
+    const handlePointerLeave = () => {
+      pointerInside = false;
+      target.radius = 0;
+      if (activeSegment !== -1) {
+        triggerSegmentFade(activeSegment, performance.now());
+      }
+      needsRender = true;
+      startRenderLoop();
+    };
+
+    helmetImage.onload = () => {
+      needsRender = true;
+    };
+    helmetImage.src = assetPath("images/helmt.png");
+
+    visual.addEventListener("pointerenter", handlePointerEnter);
+    visual.addEventListener("pointermove", handlePointerMove);
+    visual.addEventListener("pointerleave", handlePointerLeave);
+    resizeObserver = new ResizeObserver(resizeCanvas);
+    resizeObserver.observe(visual);
+    resizeCanvas();
+    startRenderLoop();
+
+    return () => {
+      visual.removeEventListener("pointerenter", handlePointerEnter);
+      visual.removeEventListener("pointermove", handlePointerMove);
+      visual.removeEventListener("pointerleave", handlePointerLeave);
+      resizeObserver?.disconnect();
+      window.cancelAnimationFrame(animationFrame);
+    };
   }, []);
 
   const linkedIn = socials.find((s) => s.kind === "linkedin");
@@ -163,9 +483,12 @@ export default function HeroSection() {
 
           {/* Right: Portrait only */}
           <div className="lg:col-span-5 flex justify-center order-1 lg:order-2 w-full">
-            <div className="relative w-full max-w-[380px] sm:max-w-[440px] lg:max-w-[480px]">
+            <div
+              ref={visualRef}
+              className="relative w-full max-w-[380px] sm:max-w-[440px] lg:max-w-[480px] touch-pan-y"
+            >
               {/* Holographic backdrop */}
-              <div className="relative rounded-3xl border border-border/40 bg-gradient-to-b from-surface/50 via-bg/30 to-surface/60 backdrop-blur-[1px] overflow-hidden">
+              <div className="relative aspect-[3769/3218] rounded-3xl border border-border/40 bg-gradient-to-b from-surface/50 via-bg/30 to-surface/60 backdrop-blur-[1px] overflow-hidden">
                 {/* Subtle grid */}
                 <div
                   className="absolute inset-0 opacity-[0.04] pointer-events-none"
@@ -190,11 +513,20 @@ export default function HeroSection() {
                   SURABAYA ┘
                 </div>
 
-                {/* Portrait image */}
+                {/* Canvas helmet layer erases only the area under the pointer. */}
+                <canvas
+                  ref={helmetCanvasRef}
+                  aria-hidden="true"
+                  className="absolute inset-0 z-[3] h-full w-full pointer-events-none drop-shadow-[0_0_26px_rgba(200,255,0,0.28)]"
+                />
+
+                {/* Portrait subject remains below the masked helmet layer. */}
                 <img
-                  src={assetPath("images/profile_torso.png")}
+                  src={assetPath("images/tubuh.png")}
                   alt="Nur Kholis Wakhid — Full Stack Web Developer & SEO Specialist"
-                  className="relative z-[2] w-full h-auto object-contain object-bottom"
+                  className={`absolute inset-0 z-[2] h-full w-full object-fill transition-opacity duration-1000 ${
+                    isVisible ? "opacity-100" : "opacity-0"
+                  }`}
                   style={{
                     maskImage:
                       "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%)",
