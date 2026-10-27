@@ -10,6 +10,7 @@ import SkillsSection from "@/components/sections/SkillsSection";
 import CertificationsSection from "@/components/sections/CertificationsSection";
 import EducationSection from "@/components/sections/EducationSection";
 import ContactSection from "@/components/sections/ContactSection";
+import AstronautIntroSection from "@/components/sections/AstronautIntroSection";
 
 export default function Home() {
   return (
@@ -19,7 +20,13 @@ export default function Home() {
       <Navbar />
 
       <main id="main-content" className="relative z-10">
-        <HeroSection />
+        <div
+          data-hero-sequence
+          className="relative isolate overflow-visible bg-transparent"
+        >
+          <AstronautIntroSection />
+          <HeroSection />
+        </div>
         <AboutSection />
         <ProjectsSection />
         <ExperienceSection />

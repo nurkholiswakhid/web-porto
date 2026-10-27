@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { ArrowDown, Download, Mail, MapPin } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
 import { profile } from "@/data/profile";
@@ -10,22 +10,9 @@ import MarqueeText from "@/components/effects/MarqueeText";
 import { soundFx } from "@/lib/audio";
 
 export default function HeroSection() {
-  const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const visualRef = useRef<HTMLDivElement>(null);
   const helmetCanvasRef = useRef<HTMLCanvasElement>(null);
-
-  // Entrance reveal
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    const timer = setTimeout(
-      () => setIsVisible(true),
-      prefersReducedMotion ? 0 : 200
-    );
-    return () => clearTimeout(timer);
-  }, []);
 
   useEffect(() => {
     const visual = visualRef.current;
@@ -186,7 +173,9 @@ export default function HeroSection() {
             canvasSize.width,
             canvasSize.height
           );
-          if (pointerInside || hasActiveFade()) {
+          const transitionActive =
+            visual.dataset.heroTransitionActive === "true";
+          if (!transitionActive && (pointerInside || hasActiveFade())) {
             context.save();
             context.globalCompositeOperation = "destination-out";
             redrawTrail(now);
@@ -239,6 +228,10 @@ export default function HeroSection() {
       if (!animationFrame) {
         animationFrame = window.requestAnimationFrame(render);
       }
+    };
+    const handleTransitionStateChange = () => {
+      needsRender = true;
+      startRenderLoop();
     };
 
     const handlePointerMove = (event: PointerEvent) => {
@@ -331,6 +324,10 @@ export default function HeroSection() {
     visual.addEventListener("pointerenter", handlePointerEnter);
     visual.addEventListener("pointermove", handlePointerMove);
     visual.addEventListener("pointerleave", handlePointerLeave);
+    visual.addEventListener(
+      "hero-transition-state-change",
+      handleTransitionStateChange
+    );
     resizeObserver = new ResizeObserver(resizeCanvas);
     resizeObserver.observe(visual);
     resizeCanvas();
@@ -340,6 +337,10 @@ export default function HeroSection() {
       visual.removeEventListener("pointerenter", handlePointerEnter);
       visual.removeEventListener("pointermove", handlePointerMove);
       visual.removeEventListener("pointerleave", handlePointerLeave);
+      visual.removeEventListener(
+        "hero-transition-state-change",
+        handleTransitionStateChange
+      );
       resizeObserver?.disconnect();
       window.cancelAnimationFrame(animationFrame);
     };
@@ -353,7 +354,8 @@ export default function HeroSection() {
     <section
       ref={sectionRef}
       id="hero"
-      className="relative min-h-screen flex flex-col justify-center overflow-hidden"
+      data-hero-section
+      className="relative z-0 -mt-[100vh] min-h-screen flex flex-col justify-center overflow-visible bg-transparent"
       aria-label="Hero section"
     >
       {/* Ambient gradient glows */}
@@ -362,9 +364,7 @@ export default function HeroSection() {
 
       {/* Main Hero Content */}
       <div
-        className={`relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 transition-all duration-1000 ${
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-        }`}
+        className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16"
       >
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-4 items-center">
           {/* Left: Text Content */}
@@ -485,10 +485,11 @@ export default function HeroSection() {
           <div className="lg:col-span-5 flex justify-center order-1 lg:order-2 w-full">
             <div
               ref={visualRef}
-              className="relative w-full max-w-[380px] sm:max-w-[440px] lg:max-w-[480px] touch-pan-y"
+              data-hero-visual
+              className="relative w-full max-w-[380px] sm:max-w-[440px] lg:max-w-[480px] touch-pan-y opacity-0"
             >
               {/* Holographic backdrop */}
-              <div className="relative aspect-[3769/3218] rounded-3xl border border-border/40 bg-gradient-to-b from-surface/50 via-bg/30 to-surface/60 backdrop-blur-[1px] overflow-hidden">
+              <div className="relative aspect-[3769/3218] overflow-hidden">
                 {/* Subtle grid */}
                 <div
                   className="absolute inset-0 opacity-[0.04] pointer-events-none"
@@ -524,9 +525,7 @@ export default function HeroSection() {
                 <img
                   src={assetPath("images/tubuh.png")}
                   alt="Nur Kholis Wakhid — Full Stack Web Developer & SEO Specialist"
-                  className={`absolute inset-0 z-[2] h-full w-full object-fill transition-opacity duration-1000 ${
-                    isVisible ? "opacity-100" : "opacity-0"
-                  }`}
+                  className="absolute inset-0 z-[2] h-full w-full object-fill"
                   style={{
                     maskImage:
                       "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%)",
