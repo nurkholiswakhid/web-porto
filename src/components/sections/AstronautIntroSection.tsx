@@ -556,7 +556,6 @@ export default function AstronautIntroSection() {
       }
     };
     const handlePointerMove = (event: PointerEvent) => {
-      if (event.pointerType === "touch") return;
       const bounds = visual.getBoundingClientRect();
       manualTarget.x = ((event.clientX - bounds.left) / bounds.width) * 100;
       manualTarget.y = ((event.clientY - bounds.top) / bounds.height) * 100;
@@ -583,7 +582,6 @@ export default function AstronautIntroSection() {
       startRender();
     };
     const handlePointerEnter = (event: PointerEvent) => {
-      if (event.pointerType === "touch") return;
       pointerInside = true;
       const bounds = visual.getBoundingClientRect();
       previousX = ((event.clientX - bounds.left) / bounds.width) * 100;
@@ -595,6 +593,9 @@ export default function AstronautIntroSection() {
       manualTarget.radius = 0;
       needsRender = true;
       startRender();
+    };
+    const handleTouchPointerEnd = (event: PointerEvent) => {
+      if (event.pointerType === "touch") handlePointerLeave();
     };
 
     helmetImage.onload = resize;
@@ -622,6 +623,8 @@ export default function AstronautIntroSection() {
     visual.addEventListener("pointerenter", handlePointerEnter);
     visual.addEventListener("pointermove", handlePointerMove);
     visual.addEventListener("pointerleave", handlePointerLeave);
+    visual.addEventListener("pointerup", handleTouchPointerEnd);
+    visual.addEventListener("pointercancel", handleTouchPointerEnd);
     resize();
 
     return () => {
@@ -631,6 +634,8 @@ export default function AstronautIntroSection() {
       visual.removeEventListener("pointerenter", handlePointerEnter);
       visual.removeEventListener("pointermove", handlePointerMove);
       visual.removeEventListener("pointerleave", handlePointerLeave);
+      visual.removeEventListener("pointerup", handleTouchPointerEnd);
+      visual.removeEventListener("pointercancel", handleTouchPointerEnd);
       if (tickerActive) gsap.ticker.remove(render);
     };
   }, []);
@@ -816,7 +821,7 @@ export default function AstronautIntroSection() {
         </div>
         <div
           ref={astronautRef}
-          className="pointer-events-auto relative z-[60] h-[min(98vw,520px)] w-[min(98vw,520px)] will-change-transform lg:h-[min(126vw,760px)] lg:w-[min(98vw,880px)]"
+          className="pointer-events-auto relative z-[60] h-[min(98vw,520px)] w-[min(98vw,520px)] touch-pan-y will-change-transform lg:h-[min(126vw,760px)] lg:w-[min(98vw,880px)]"
         >
           <img
             src={assetPath("images/tubuh.png")}
