@@ -359,27 +359,27 @@ export default function HeroSection() {
       aria-label="Hero section"
     >
       {/* Ambient gradient glows */}
-      <div className="absolute top-[-200px] left-[-200px] w-[600px] h-[600px] bg-accent/[0.04] rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-[-100px] right-[-150px] w-[500px] h-[500px] bg-accent/[0.02] rounded-full blur-[120px] pointer-events-none" />
+      <div className="pointer-events-none absolute left-1/2 top-[-120px] h-[min(90vw,600px)] w-[min(90vw,600px)] -translate-x-1/2 rounded-full bg-accent/[0.04] blur-[120px] lg:left-[-200px] lg:top-[-200px] lg:h-[600px] lg:w-[600px] lg:translate-x-0 lg:blur-[150px]" />
+      <div className="pointer-events-none absolute bottom-[-80px] left-1/2 h-[min(85vw,500px)] w-[min(85vw,500px)] -translate-x-1/2 rounded-full bg-accent/[0.02] blur-[100px] lg:bottom-[-100px] lg:left-auto lg:right-[-150px] lg:h-[500px] lg:w-[500px] lg:translate-x-0 lg:blur-[120px]" />
 
       {/* Main Hero Content */}
       <div
-        className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16"
+        className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 sm:pt-28 pb-16"
       >
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-4 items-center">
           {/* Left: Text Content */}
           <div className="lg:col-span-7 text-center lg:text-left flex flex-col items-center lg:items-start">
             {/* Status Pill */}
-            <div className="inline-flex items-center gap-2 mb-6 px-3.5 py-1.5 rounded-full border border-border bg-surface/60 backdrop-blur-md">
+            <div className="mb-6 flex w-fit max-w-full flex-col items-center gap-2 rounded-2xl border border-border bg-surface/60 px-3.5 py-2 text-center backdrop-blur-md sm:inline-flex sm:flex-row sm:items-center sm:gap-2 sm:rounded-full sm:py-1.5">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
               </span>
-              <span className="font-mono text-xs text-text-secondary">
+              <span className="whitespace-nowrap font-mono text-xs text-text-secondary">
                 Available for Opportunities
               </span>
-              <span className="text-border">|</span>
-              <span className="font-mono text-[11px] text-accent flex items-center gap-1">
+              <span className="hidden text-border sm:inline">|</span>
+              <span className="flex items-center gap-1 whitespace-nowrap font-mono text-[11px] text-accent">
                 <MapPin className="w-3 h-3" /> Surabaya, ID
               </span>
             </div>
@@ -489,7 +489,7 @@ export default function HeroSection() {
               className="relative w-full max-w-[380px] sm:max-w-[440px] lg:max-w-[480px] touch-pan-y opacity-0"
             >
               {/* Holographic backdrop */}
-              <div className="relative aspect-[3769/3218] overflow-hidden">
+              <div className="relative aspect-square overflow-hidden lg:aspect-[3769/3218]">
                 {/* Subtle grid */}
                 <div
                   className="absolute inset-0 opacity-[0.04] pointer-events-none"
@@ -518,14 +518,14 @@ export default function HeroSection() {
                 <canvas
                   ref={helmetCanvasRef}
                   aria-hidden="true"
-                  className="absolute inset-0 z-[3] h-full w-full pointer-events-none drop-shadow-[0_0_26px_rgba(200,255,0,0.28)]"
+                  className="invisible absolute inset-0 z-[3] h-full w-full pointer-events-none drop-shadow-[0_0_26px_rgba(200,255,0,0.28)]"
                 />
 
                 {/* Portrait subject remains below the masked helmet layer. */}
                 <img
                   src={assetPath("images/tubuh.png")}
                   alt="Nur Kholis Wakhid — Full Stack Web Developer & SEO Specialist"
-                  className="absolute inset-0 z-[2] h-full w-full object-fill"
+                  className="absolute inset-0 z-[2] h-full w-full object-contain lg:object-fill"
                   style={{
                     maskImage:
                       "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%)",
