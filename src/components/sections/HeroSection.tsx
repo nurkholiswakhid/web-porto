@@ -482,11 +482,11 @@ export default function HeroSection() {
           </div>
 
           {/* Right: Portrait only */}
-          <div className="lg:col-span-5 flex justify-center order-1 lg:order-2 w-full">
+          <div className="order-first flex w-full justify-center lg:col-span-5 lg:order-2">
             <div
               ref={visualRef}
               data-hero-visual
-              className="relative w-full max-w-[380px] sm:max-w-[440px] lg:max-w-[480px] touch-pan-y opacity-0"
+              className="relative w-full max-w-[380px] touch-pan-y opacity-0 sm:max-w-[440px] lg:max-w-[480px]"
             >
               {/* Holographic backdrop */}
               <div className="relative aspect-square overflow-hidden lg:aspect-[3769/3218]">
@@ -568,7 +568,7 @@ export default function HeroSection() {
 
               {/* Orbit ring decoration */}
               <div
-                className="absolute -inset-4 rounded-full border border-dashed border-accent/[0.07] pointer-events-none"
+                className="pointer-events-none absolute -inset-4 scale-[0.62] rounded-full border border-dashed border-accent/[0.07] lg:scale-100"
                 style={{ animation: "spin 40s linear infinite" }}
                 aria-hidden="true"
               >

@@ -765,7 +765,11 @@ export default function AstronautIntroSection() {
         .fromTo(
           glow,
           { scale: 1, autoAlpha: 0.7 },
-          { scale: 1.35, autoAlpha: 0.15, duration: 1 },
+          {
+            scale: isMobileLayout() ? 1.08 : 1.35,
+            autoAlpha: 0.15,
+            duration: 1,
+          },
           0
         )
         .to(
