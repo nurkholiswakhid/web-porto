@@ -13,6 +13,8 @@ export default function AstronautIntroSection() {
   const astronautRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
   const introNameRef = useRef<HTMLDivElement>(null);
+  const introOrbitRef = useRef<SVGSVGElement>(null);
+  const introGroundRef = useRef<SVGSVGElement>(null);
   const scrollCueRef = useRef<HTMLDivElement>(null);
   const introCanvasRef = useRef<HTMLCanvasElement>(null);
   const automaticBlobPathRef = useRef<SVGPathElement>(null);
@@ -645,8 +647,20 @@ export default function AstronautIntroSection() {
     const astronaut = astronautRef.current;
     const glow = glowRef.current;
     const introName = introNameRef.current;
+    const introOrbit = introOrbitRef.current;
+    const introGround = introGroundRef.current;
     const scrollCue = scrollCueRef.current;
-    if (!section || !astronaut || !glow || !introName || !scrollCue) return;
+    if (
+      !section ||
+      !astronaut ||
+      !glow ||
+      !introName ||
+      !introOrbit ||
+      !introGround ||
+      !scrollCue
+    ) {
+      return;
+    }
     const target = document.querySelector<HTMLElement>("[data-hero-visual]");
     const sequence = document.querySelector<HTMLElement>("[data-hero-sequence]");
     const heroSection = document.querySelector<HTMLElement>("[data-hero-section]");
@@ -672,7 +686,7 @@ export default function AstronautIntroSection() {
           end: () =>
             `+=${Math.max(window.innerHeight, section.offsetHeight - window.innerHeight)}`,
           onUpdate: (self) =>
-            gsap.set(introName, {
+            gsap.set([introName, introOrbit, introGround], {
               autoAlpha: 1 - gsap.utils.clamp(0, 1, self.progress / 0.18),
             }),
         });
@@ -716,7 +730,9 @@ export default function AstronautIntroSection() {
         const handoff = gsap.utils.clamp(0, 1, (progress - 0.88) / 0.12);
         const introOpacity =
           1 - gsap.utils.clamp(0, 1, progress / 0.18);
-        gsap.set(introName, { autoAlpha: introOpacity });
+        gsap.set([introName, introOrbit, introGround], {
+          autoAlpha: introOpacity,
+        });
         gsap.set(astronaut, {
           autoAlpha: isMobileLayout() ? introOpacity : 1 - handoff,
         });
@@ -812,6 +828,71 @@ export default function AstronautIntroSection() {
           className="absolute left-1/2 top-1/2 h-[min(90vw,760px)] w-[min(90vw,760px)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/[0.08] blur-[110px] will-change-transform"
           aria-hidden="true"
         />
+        <svg
+          ref={introOrbitRef}
+          aria-hidden="true"
+          viewBox="0 0 600 260"
+          className="pointer-events-none absolute left-1/2 top-[56%] z-0 h-[min(42vw,260px)] w-[min(92vw,620px)] -translate-x-1/2 -translate-y-1/2 overflow-visible text-accent"
+        >
+          <ellipse
+            cx="300"
+            cy="130"
+            rx="274"
+            ry="70"
+            transform="rotate(-12 300 130)"
+            fill="none"
+            stroke="currentColor"
+            strokeOpacity="0.18"
+            strokeWidth="1.25"
+            strokeDasharray="3 9"
+          />
+          <ellipse
+            cx="300"
+            cy="130"
+            rx="236"
+            ry="52"
+            transform="rotate(-12 300 130)"
+            fill="none"
+            stroke="currentColor"
+            strokeOpacity="0.08"
+            strokeWidth="1"
+          />
+          <circle cx="49" cy="174" r="3" fill="currentColor" fillOpacity="0.55" />
+          <circle cx="549" cy="86" r="2.5" fill="currentColor" fillOpacity="0.4" />
+        </svg>
+        <svg
+          ref={introGroundRef}
+          aria-hidden="true"
+          viewBox="0 0 600 80"
+          className="pointer-events-none absolute left-1/2 top-[78%] z-0 h-16 w-[min(76vw,560px)] -translate-x-1/2 -translate-y-1/2 overflow-visible text-accent sm:h-20"
+        >
+          <ellipse
+            cx="300"
+            cy="40"
+            rx="218"
+            ry="20"
+            fill="currentColor"
+            fillOpacity="0.025"
+          />
+          <ellipse
+            cx="300"
+            cy="40"
+            rx="218"
+            ry="20"
+            fill="none"
+            stroke="currentColor"
+            strokeOpacity="0.16"
+            strokeWidth="1"
+          />
+          <path
+            d="M118 40c44 18 320 18 364 0"
+            fill="none"
+            stroke="currentColor"
+            strokeOpacity="0.24"
+            strokeWidth="1.25"
+            strokeLinecap="round"
+          />
+        </svg>
         <div
           ref={introNameRef}
           aria-hidden="true"

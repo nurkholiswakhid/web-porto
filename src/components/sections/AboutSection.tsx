@@ -14,7 +14,6 @@ import {
 import { profile } from "@/data/profile";
 import { assetPath } from "@/lib/utils";
 import { useReveal } from "@/hooks/useReveal";
-import SignatureWordmark from "@/components/effects/SignatureWordmark";
 import TiltCard from "@/components/effects/TiltCard";
 import MarqueeText from "@/components/effects/MarqueeText";
 
@@ -147,9 +146,17 @@ export default function AboutSection() {
                 </div>
               </div>
 
-              {/* Signature */}
-              <div className="mt-4 pt-3 border-t border-border">
-                <SignatureWordmark />
+              <div className="mt-4 flex items-start gap-3 rounded-xl border border-accent/15 bg-accent/[0.04] p-3">
+                <Target className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                <div>
+                  <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.18em] text-accent">
+                    Fokus Saat Ini
+                  </p>
+                  <p className="mt-1 text-xs leading-relaxed text-text-secondary">
+                    Merancang produk digital yang cepat, mudah digunakan, dan
+                    bertumbuh lewat strategi berbasis data.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
