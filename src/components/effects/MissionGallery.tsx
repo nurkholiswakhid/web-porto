@@ -64,10 +64,10 @@ export default function MissionGallery() {
         <div>
           <div className="font-mono text-xs text-cosmic-highlight flex items-center gap-1.5 uppercase tracking-widest">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Mission Gallery // Horizontal Flight Stream</span>
+            <span>Selected Projects</span>
           </div>
           <h3 className="font-display text-xl sm:text-2xl font-bold text-cosmic-text mt-1">
-            Visual Expedition Feed
+            Project Overview
           </h3>
         </div>
 
@@ -140,7 +140,7 @@ export default function MissionGallery() {
                   />
                 ) : (
                   <div className="w-full h-full bg-gradient-to-tr from-cosmic-primary/20 via-cosmic-surface to-cosmic-secondary/20 flex items-center justify-center font-mono text-xs text-cosmic-text-dim">
-                    [MISSION ASSET]
+                    Project preview unavailable
                   </div>
                 )}
                 {/* Tech tag pill */}
@@ -159,7 +159,7 @@ export default function MissionGallery() {
                 <div>
                   <div className="flex items-center gap-1.5 text-xs text-cosmic-text-dim font-mono mb-1">
                     <MapPin className="w-3 h-3 text-cosmic-secondary" />
-                    <span>INDONESIA // PROD</span>
+                    <span>INDONESIA</span>
                   </div>
                   <h4 className="font-display text-lg font-bold text-cosmic-text group-hover:text-cosmic-secondary transition-colors line-clamp-1">
                     {project.title}
@@ -187,7 +187,7 @@ export default function MissionGallery() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="p-1.5 rounded-lg border border-cosmic-border bg-cosmic-surface hover:border-cosmic-highlight hover:text-cosmic-highlight text-cosmic-text-secondary transition-colors"
-                      title="Launch live mission"
+                      title={`View ${project.title}`}
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
                     </a>

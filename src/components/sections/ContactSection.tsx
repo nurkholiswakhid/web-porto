@@ -32,8 +32,8 @@ export default function ContactSection() {
         <MarqueeText
           lines={[
             {
-              text: "LET'S CONNECT LET'S BUILD LET'S INNOVATE",
-              accentWords: ["CONNECT", "BUILD", "INNOVATE"],
+              text: "LET'S CONNECT LET'S COLLABORATE LET'S CREATE",
+              accentWords: ["CONNECT", "COLLABORATE", "CREATE"],
             },
           ]}
           speed={25}
@@ -45,14 +45,15 @@ export default function ContactSection() {
           <div className="reveal">
             <div className="section-label mx-auto w-fit">
               <span className="w-1.5 h-1.5 bg-accent rounded-full" />
-              Contact
+              Contact Information
             </div>
             <h2 className="font-display font-black text-[clamp(2rem,5vw,3.5rem)] leading-[1.1] tracking-tight text-foreground text-center">
               LET&apos;S{" "}
               <span className="text-accent italic">CONNECT</span>
             </h2>
             <p className="section-subtitle mx-auto text-center mt-4 mb-10">
-              Ready to build something great? Reach out through any channel.
+              Have a project in mind or an opportunity to discuss? Get in
+              touch through your preferred channel.
             </p>
           </div>
 

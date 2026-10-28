@@ -7,7 +7,7 @@ export const publications: Publication[] = [
     venue: "IEEE International Conference",
     year: 2024,
     description:
-      "Penelitian implementasi gamifikasi edukatif dalam pembelajaran CSS Flexbox untuk meningkatkan pemahaman dan motivasi belajar siswa kejuruan.",
+      "Penelitian tentang penerapan gamifikasi dalam pembelajaran CSS Flexbox untuk mendukung pemahaman dan keterlibatan siswa sekolah kejuruan.",
     url: "https://ieeexplore.ieee.org/",
   },
   {
@@ -16,18 +16,18 @@ export const publications: Publication[] = [
     venue: "Jurnal Nasional Terakreditasi SINTA 4",
     year: 2025,
     description:
-      "Riset ekstraksi opini publik berskala besar memanfaatkan metode Latent Dirichlet Allocation (LDA) dan NLP pada data komentar YouTube.",
+      "Analisis opini publik pada komentar YouTube menggunakan pemrosesan bahasa alami dan metode Latent Dirichlet Allocation (LDA).",
   },
 ];
 
 export const achievements: Achievement[] = [
   {
-    title: "Finalis Top 20 Nasional",
+    title: "Top 20 National Finalist",
     event: "Lomba Inovasi Digital Mahasiswa (LIDM)",
     organizer:
-      "Kementerian Pendidikan Tinggi, Sains, dan Teknologi Republik Indonesia",
+      "Ministry of Higher Education, Science, and Technology of the Republic of Indonesia",
     year: 2024,
     highlight:
-      "Kompetisi inovasi teknologi digital bergengsi tingkat perguruan tinggi se-Indonesia.",
+      "National competition recognizing digital innovation projects from higher education institutions across Indonesia.",
   },
 ];

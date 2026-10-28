@@ -42,11 +42,11 @@ export default function SkillsSection() {
             Skills
           </div>
           <h2 className="font-display font-black text-[clamp(2rem,5vw,3.5rem)] leading-[1.1] tracking-tight text-foreground">
-            TECH{" "}
-            <span className="text-accent italic">ARSENAL</span>
+            TECHNICAL{" "}
+            <span className="text-accent italic">SKILLS</span>
           </h2>
           <p className="section-subtitle mt-4">
-            Tools and technologies powering the mission.
+            Technologies and tools applied across professional projects.
           </p>
         </div>
 
@@ -96,7 +96,7 @@ export default function SkillsSection() {
         <div className="reveal mt-12">
           <div className="hud-panel">
             <div className="font-mono text-[10px] text-text-dim uppercase tracking-widest mb-4">
-              Full Stack
+              Core Technologies
             </div>
             <div className="flex flex-wrap gap-2">
               {skills

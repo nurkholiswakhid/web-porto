@@ -376,11 +376,11 @@ export default function HeroSection() {
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
               </span>
               <span className="whitespace-nowrap font-mono text-xs text-text-secondary">
-                Available for Opportunities
+                Open to Professional Opportunities
               </span>
               <span className="hidden text-border sm:inline">|</span>
               <span className="flex items-center gap-1 whitespace-nowrap font-mono text-[11px] text-accent">
-                <MapPin className="w-3 h-3" /> Surabaya, ID
+                <MapPin className="w-3 h-3" /> Surabaya, Indonesia
               </span>
             </div>
 
@@ -400,23 +400,23 @@ export default function HeroSection() {
 
             {/* Tagline */}
             <p className="text-base sm:text-lg text-text-secondary leading-relaxed max-w-lg mb-8">
-              Building high-performance digital solutions — from scalable web
-              architectures to data-driven SEO strategies.
+              I build reliable web applications and improve organic search
+              performance through thoughtful engineering and measurable SEO.
             </p>
 
             {/* Key Stats */}
             <div className="grid grid-cols-3 gap-3 w-full max-w-md mb-8">
               <div className="p-3 rounded-xl border border-border bg-surface/40 text-center lg:text-left">
                 <div className="font-display text-xl font-bold text-accent">3.84</div>
-                <div className="font-mono text-[10px] text-text-dim">IPK · UNESA</div>
+                <div className="font-mono text-[10px] text-text-dim">GPA · UNESA</div>
               </div>
               <div className="p-3 rounded-xl border border-border bg-surface/40 text-center lg:text-left">
                 <div className="font-display text-xl font-bold text-foreground">Top 20</div>
-                <div className="font-mono text-[10px] text-text-dim">LIDM Nasional</div>
+                <div className="font-mono text-[10px] text-text-dim">NATIONAL FINALIST</div>
               </div>
               <div className="p-3 rounded-xl border border-border bg-surface/40 text-center lg:text-left">
                 <div className="font-display text-xl font-bold text-accent">IEEE</div>
-                <div className="font-mono text-[10px] text-text-dim">Published</div>
+                <div className="font-mono text-[10px] text-text-dim">IEEE PUBLICATION</div>
               </div>
             </div>
 
@@ -429,7 +429,7 @@ export default function HeroSection() {
                 data-cursor="PROJECTS"
                 className="btn-primary cursor-pointer"
               >
-                <span>Explore Projects</span>
+                <span>View Selected Projects</span>
                 <ArrowDown className="w-4 h-4" />
               </a>
               <a
@@ -502,16 +502,16 @@ export default function HeroSection() {
 
                 {/* Telemetry corners */}
                 <div className="absolute top-3 left-3 font-mono text-[9px] text-accent/40 tracking-widest z-10">
-                  ┌ NKW-001 // 2026
+                  WEB DEVELOPMENT
                 </div>
                 <div className="absolute top-3 right-3 font-mono text-[9px] text-accent/40 tracking-widest z-10">
-                  PILOT: ACTIVE ┐
+                  SEO STRATEGY ┐
                 </div>
                 <div className="absolute bottom-3 left-3 font-mono text-[9px] text-text-dim/40 tracking-widest z-10">
-                  └ 7.25°S 112.75°E
+                  └ SURABAYA, INDONESIA
                 </div>
                 <div className="absolute bottom-3 right-3 font-mono text-[9px] text-accent/30 tracking-widest z-10">
-                  SURABAYA ┘
+                  OPEN TO OPPORTUNITIES ┘
                 </div>
 
                 {/* Canvas helmet layer erases only the area under the pointer. */}
@@ -546,8 +546,8 @@ export default function HeroSection() {
                     </svg>
                   </div>
                   <div>
-                    <div className="font-mono text-[9px] text-accent font-semibold uppercase tracking-wider">SEO &amp; Visibility</div>
-                    <div className="text-[11px] font-semibold text-foreground">Data-Driven Growth</div>
+                    <div className="font-mono text-[9px] text-accent font-semibold uppercase tracking-wider">SEO &amp; Performance</div>
+                    <div className="text-[11px] font-semibold text-foreground">Measurable Organic Growth</div>
                   </div>
                 </div>
               </div>
@@ -560,8 +560,8 @@ export default function HeroSection() {
                     </svg>
                   </div>
                   <div>
-                    <div className="font-mono text-[9px] text-accent font-semibold uppercase tracking-wider">Full Stack Dev</div>
-                    <div className="text-[11px] font-semibold text-foreground">Laravel · Next.js · REST</div>
+                    <div className="font-mono text-[9px] text-accent font-semibold uppercase tracking-wider">Full Stack Development</div>
+                    <div className="text-[11px] font-semibold text-foreground">Laravel · Next.js · REST APIs</div>
                   </div>
                 </div>
               </div>
@@ -584,12 +584,12 @@ export default function HeroSection() {
         <MarqueeText
           lines={[
             {
-              text: "FULL STACK DEVELOPER SEO SPECIALIST AI ENTHUSIAST",
-              accentWords: ["DEVELOPER", "SPECIALIST", "ENTHUSIAST"],
+              text: "FULL STACK DEVELOPMENT TECHNICAL SEO AI INTEGRATION",
+              accentWords: ["DEVELOPMENT", "SEO", "INTEGRATION"],
             },
             {
-              text: "BUILDING DIGITAL EXPERIENCES BEYOND BOUNDARIES",
-              accentWords: ["DIGITAL", "BEYOND", "BOUNDARIES"],
+              text: "RELIABLE WEB APPLICATIONS MEASURABLE ORGANIC GROWTH",
+              accentWords: ["RELIABLE", "MEASURABLE", "GROWTH"],
             },
           ]}
           speed={35}

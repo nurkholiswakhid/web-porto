@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Nur Kholis Wakhid — Full Stack Web Developer & SEO Specialist",
   description:
-    "Portofolio profesional Nur Kholis Wakhid: Full Stack Web Developer (Laravel, Next.js), SEO Specialist berbasis data, dan AI/LLM Enthusiast. Menghadirkan solusi digital berkinerja tinggi dan terukur.",
+    "Portofolio Nur Kholis Wakhid, Full Stack Web Developer dan Technical SEO Specialist di Surabaya. Berfokus pada aplikasi web yang andal, optimasi pencarian organik, dan integrasi AI/LLM.",
   keywords: [
     "Nur Kholis Wakhid",
     "Full Stack Web Developer",
@@ -18,9 +18,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Nur Kholis Wakhid" }],
   openGraph: {
-    title: "Nur Kholis Wakhid — Portfolio Cosmic Frontier",
+    title: "Nur Kholis Wakhid — Portfolio",
     description:
-      "Full Stack Web Developer, SEO Specialist & AI Enthusiast — Building Digital Experiences Beyond Boundaries.",
+      "Full Stack Web Developer and Technical SEO Specialist building reliable applications and improving organic search performance.",
     type: "website",
     locale: "id_ID",
   },

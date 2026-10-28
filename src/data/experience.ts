@@ -2,16 +2,16 @@ import { Experience } from "./types";
 
 export const experiences: Experience[] = [
   {
-    company: "Freelance / Mandiri",
+    company: "Independent",
     role: "Freelance Web Developer",
     location: "Surabaya, Jawa Timur",
     start: "2025-01",
     end: undefined, // Sekarang
     summary: [
-      "Membangun dan mengelola website seperti belajarproperti.co.id dan griyaone.id untuk pemasaran & pelatihan properti.",
-      "Mengembangkan aplikasi web end-to-end (frontend, backend, database) serta REST API untuk integrasi sistem yang andal.",
-      "Merancang UI/UX yang responsif, melakukan deployment server, dan pemeliharaan sistem berkelanjutan.",
-      "Menerapkan SEO on-page, riset kata kunci strategis, dan optimasi Core Web Vitals untuk meningkatkan traffic organik.",
+      "Mengembangkan dan mengelola situs BelajarProperti.co.id dan GriyaOne.id untuk mendukung pemasaran serta pelatihan di bidang properti.",
+      "Membangun aplikasi web menyeluruh, mencakup antarmuka, backend, basis data, dan REST API untuk integrasi sistem.",
+      "Merancang antarmuka responsif, menerapkan aplikasi ke server, dan melakukan pemeliharaan berkala.",
+      "Menerapkan SEO on-page, riset kata kunci, dan optimasi Core Web Vitals untuk meningkatkan visibilitas pencarian organik.",
     ],
     tools: [
       "Laravel",
@@ -23,19 +23,19 @@ export const experiences: Experience[] = [
       "Core Web Vitals",
     ],
     achievements: [
-      "Berhasil meluncurkan platform pelatihan properti belajarproperti.co.id dan portal griyaone.id dengan performa tinggi.",
+      "Meluncurkan platform pelatihan properti BelajarProperti.co.id dan portal properti GriyaOne.id.",
     ],
   },
   {
     company: "Brighton Real Estate",
-    role: "SEO Intern - IT Development Department",
+    role: "SEO Intern — IT Development Department",
     location: "Surabaya, Jawa Timur",
     start: "2024-06",
     end: "2024-09",
     summary: [
-      "Melakukan optimasi on-page SEO, riset keyword mendalam, metadata, heading hierarchy, dan internal linking struktur website.",
-      "Mengembangkan tools otomasi berbasis Python untuk web scraping, analisis konten, dan pengolahan data SEO.",
-      "Menganalisis SERP, duplicate content, serta keyword cannibalization untuk mendukung optimasi konten berskala besar.",
+      "Menerapkan SEO on-page melalui riset kata kunci, optimasi metadata, struktur heading, dan tautan internal.",
+      "Mengembangkan alat otomasi Python untuk web scraping, analisis konten, dan pengolahan data SEO.",
+      "Menganalisis hasil pencarian, duplikasi konten, dan keyword cannibalization untuk mendukung optimasi konten.",
     ],
     tools: [
       "Python",
@@ -47,7 +47,7 @@ export const experiences: Experience[] = [
       "SERP Analysis",
     ],
     achievements: [
-      "Membangun script otomasi scraping data kompetitor & SERP untuk efisiensi analisis tim IT & Marketing.",
+      "Membangun otomasi pengumpulan data kompetitor dan hasil pencarian untuk mendukung analisis tim IT dan pemasaran.",
     ],
   },
   {
@@ -57,9 +57,9 @@ export const experiences: Experience[] = [
     start: "2024-09",
     end: "2025-01",
     summary: [
-      "Mengembangkan kemampuan pengembangan aplikasi Android native menggunakan Android Studio, Kotlin, Coroutines, dan integrasi backend Firebase.",
-      "Berkolaborasi dalam proyek capstone tim multidisiplin (Mobile Development, Machine Learning, Cloud Computing) untuk membangun solusi produk digital end-to-end.",
-      "Menerapkan arsitektur MVVM, dependency injection, dan best practice clean code standar industri.",
+      "Mengembangkan aplikasi Android native menggunakan Android Studio, Kotlin, Coroutines, dan Firebase.",
+      "Berkolaborasi dalam proyek akhir lintas bidang yang mencakup pengembangan aplikasi mobile, machine learning, dan cloud computing.",
+      "Menerapkan arsitektur MVVM, dependency injection, dan praktik penulisan kode yang terstruktur.",
     ],
     tools: [
       "Kotlin",
@@ -70,7 +70,7 @@ export const experiences: Experience[] = [
       "MVVM Architecture",
     ],
     achievements: [
-      "Lulus program prestisius Bangkit Academy Batch 2 dengan menyelesaikan capstone project terintegrasi.",
+      "Menyelesaikan program Bangkit Academy Batch 2 dan proyek akhir terintegrasi.",
     ],
   },
   {
@@ -80,9 +80,9 @@ export const experiences: Experience[] = [
     start: "2023-07",
     end: "2023-09",
     summary: [
-      "Terlibat dalam pemeliharaan preventif dan perbaikan hardware/software serta memberikan dukungan teknis kepada pengguna internal.",
-      "Mendiagnosis dan menyelesaikan masalah teknis jaringan, OS, dan periferal secara efektif dalam lingkungan kerja nyata.",
-      "Mendokumentasikan prosedur pemeliharaan sistem inventaris IT perusahaan.",
+      "Melakukan pemeliharaan preventif dan perbaikan perangkat keras maupun perangkat lunak serta memberikan dukungan teknis kepada pengguna.",
+      "Mendiagnosis dan menangani kendala jaringan, sistem operasi, dan perangkat pendukung.",
+      "Mendokumentasikan prosedur pemeliharaan dan inventaris teknologi informasi perusahaan.",
     ],
     tools: [
       "Hardware Maintenance",
@@ -93,4 +93,3 @@ export const experiences: Experience[] = [
     achievements: [],
   },
 ];
-

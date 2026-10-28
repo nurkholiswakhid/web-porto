@@ -52,11 +52,12 @@ export default function ProjectsSection() {
             Projects
           </div>
           <h2 className="font-display font-black text-[clamp(2rem,5vw,3.5rem)] leading-[1.1] tracking-tight text-foreground">
-            FEATURED{" "}
-            <span className="text-accent italic">WORK</span>
+            SELECTED{" "}
+            <span className="text-accent italic">PROJECTS</span>
           </h2>
           <p className="section-subtitle mt-4">
-            A collection of projects across the digital frontier.
+            Selected work in web development, technical SEO, mobile
+            applications, and applied AI.
           </p>
         </div>
 
@@ -124,7 +125,7 @@ export default function ProjectsSection() {
                               <Eye className="w-5 h-5 text-accent" />
                             </div>
                             <span className="font-mono text-[10px] text-text-dim">
-                              {project.category.toUpperCase()}
+                              {PROJECT_CATEGORY_LABELS[project.category]}
                             </span>
                           </div>
                         </div>
@@ -181,15 +182,15 @@ export default function ProjectsSection() {
                     {expandedProject === project.slug && (
                       <div className="mb-3 p-3 rounded-xl bg-bg-secondary/70 border border-border text-xs space-y-2 animate-fade-in">
                         <div>
-                          <span className="font-mono text-[10px] text-text-dim uppercase">Role:</span>
+                          <span className="font-mono text-[10px] text-text-dim uppercase">Contribution:</span>
                           <p className="text-text-secondary font-medium">{project.role}</p>
                         </div>
                         <div>
-                          <span className="font-mono text-[10px] text-text-dim uppercase">Problem:</span>
+                          <span className="font-mono text-[10px] text-text-dim uppercase">Challenge:</span>
                           <p className="text-text-secondary">{project.problem}</p>
                         </div>
                         <div>
-                          <span className="font-mono text-[10px] text-accent uppercase">Outcome:</span>
+                          <span className="font-mono text-[10px] text-accent uppercase">Result:</span>
                           <p className="text-accent/90 font-medium">{project.outcome}</p>
                         </div>
                       </div>
@@ -207,8 +208,8 @@ export default function ProjectsSection() {
                       className="text-xs text-accent hover:text-foreground transition-colors font-mono mb-3 text-left cursor-pointer"
                     >
                       {expandedProject === project.slug
-                        ? "← Collapse"
-                        : "+ Details"}
+                        ? "← Hide project details"
+                        : "+ View project details"}
                     </button>
 
                     {/* Tech stack */}
@@ -232,7 +233,7 @@ export default function ProjectsSection() {
         {filteredProjects.length === 0 && (
           <div className="text-center py-16">
             <p className="text-text-secondary font-mono text-sm">
-              No projects found in this category.
+              No projects are currently listed in this category.
             </p>
           </div>
         )}

@@ -23,13 +23,13 @@ export default function CertificationsSection() {
         <div className="reveal">
           <div className="section-label">
             <span className="w-1.5 h-1.5 bg-accent rounded-full" />
-            Credentials
+            Professional Development
           </div>
           <h2 className="font-display font-black text-[clamp(2rem,5vw,3.5rem)] leading-[1.1] tracking-tight text-foreground">
             <span className="text-accent italic">CERTIFICATIONS</span>
           </h2>
           <p className="section-subtitle mt-4 mb-12">
-            Verified credentials from the journey.
+            Certifications and training completed from recognized providers.
           </p>
         </div>
 
@@ -73,7 +73,7 @@ export default function CertificationsSection() {
                     className="mt-3 inline-flex items-center gap-1 text-xs text-accent hover:text-foreground transition-colors"
                   >
                     <ExternalLink className="w-3 h-3" />
-                    View Credential
+                    View Certificate
                   </a>
                 )}
               </div>

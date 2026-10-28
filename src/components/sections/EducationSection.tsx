@@ -21,14 +21,14 @@ export default function EducationSection() {
         <div className="reveal mb-12">
           <div className="section-label">
             <span className="w-1.5 h-1.5 bg-accent rounded-full" />
-            Academy & Research
+            Education & Research
           </div>
           <h2 className="font-display font-black text-[clamp(2rem,5vw,3.5rem)] leading-[1.1] tracking-tight text-foreground">
-            EDUCATION &{" "}
-            <span className="text-accent italic">PUBLICATIONS</span>
+            EDUCATION,{" "}
+            <span className="text-accent italic">RESEARCH & AWARDS</span>
           </h2>
           <p className="section-subtitle mt-4">
-            Pondasi akademis, publikasi karya ilmiah, dan rekam jejak prestasi.
+            Latar belakang pendidikan, publikasi ilmiah, dan pencapaian.
           </p>
         </div>
 
@@ -36,7 +36,7 @@ export default function EducationSection() {
         <div className="mb-12">
           <div className="font-mono text-xs text-accent tracking-widest uppercase mb-4 flex items-center gap-2">
             <GraduationCap className="w-4 h-4" />
-            FORMAL EDUCATION
+            EDUCATION
           </div>
           <div className="grid md:grid-cols-2 gap-6">
             {education.map((edu, index) => (
@@ -68,7 +68,7 @@ export default function EducationSection() {
                       <div className="flex items-center gap-2 mb-3">
                         <Trophy className="w-4 h-4 text-accent" />
                         <span className="font-mono text-[10px] text-accent tracking-wider uppercase">
-                          Highlights
+                          Key Achievements
                         </span>
                       </div>
                       <ul className="space-y-2">
@@ -94,7 +94,7 @@ export default function EducationSection() {
         <div>
           <div className="font-mono text-xs text-accent tracking-widest uppercase mb-4 flex items-center gap-2">
             <BookOpen className="w-4 h-4" />
-            PUBLICATIONS & RECOGNITIONS
+            PUBLICATIONS & AWARDS
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {publications.map((pub, idx) => (
@@ -128,7 +128,7 @@ export default function EducationSection() {
                       className="inline-flex items-center gap-1.5 text-xs text-accent hover:text-foreground font-medium transition-colors"
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
-                      <span>View Paper</span>
+                      <span>View Publication</span>
                     </a>
                   </div>
                 )}
@@ -144,7 +144,7 @@ export default function EducationSection() {
                   <div className="flex items-center justify-between mb-3">
                     <span className="font-mono text-[10px] px-2.5 py-1 rounded-full border border-accent/40 bg-accent/10 text-accent font-semibold flex items-center gap-1">
                       <Award className="w-3 h-3" />
-                      NATIONAL
+                      NATIONAL AWARD
                     </span>
                     <span className="font-mono text-xs text-text-dim">
                       {ach.year}
@@ -157,7 +157,7 @@ export default function EducationSection() {
                     {ach.event}
                   </p>
                   <p className="text-xs text-text-secondary leading-relaxed mb-2">
-                    Penyelenggara: {ach.organizer}
+                    Organizer: {ach.organizer}
                   </p>
                   {ach.highlight && (
                     <p className="text-xs text-text-dim italic">

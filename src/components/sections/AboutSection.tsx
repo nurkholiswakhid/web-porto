@@ -26,25 +26,25 @@ export default function AboutSection() {
       icon: <Compass className="w-5 h-5" />,
       title: "Full Stack Web Development",
       description:
-        "Arsitektur aplikasi web end-to-end dengan Laravel, Next.js, REST API, serta database MySQL yang skalabel.",
+        "Membangun dan memelihara aplikasi web menyeluruh menggunakan Laravel, Next.js, REST API, dan MySQL.",
     },
     {
       icon: <Target className="w-5 h-5" />,
       title: "Data-Driven SEO",
       description:
-        "Meningkatkan traffic organik melalui technical SEO, riset keyword, dan optimasi Core Web Vitals.",
+        "Meningkatkan visibilitas pencarian organik melalui technical SEO, riset kata kunci, dan optimasi Core Web Vitals.",
     },
     {
       icon: <Brain className="w-5 h-5" />,
       title: "AI & LLM Integration",
       description:
-        "Eksplorasi integrasi AI/LLM, prompt engineering, dan riset pemodelan topik terpublikasi di jurnal bereputasi.",
+        "Mengembangkan integrasi AI dan LLM serta menerapkan pemodelan topik dalam riset yang dipublikasikan.",
     },
     {
       icon: <Smartphone className="w-5 h-5" />,
       title: "Mobile Engineering",
       description:
-        "Membangun aplikasi Android native dengan Kotlin, Firebase, dan arsitektur MVVM.",
+        "Mengembangkan aplikasi Android dengan Kotlin, Firebase, dan arsitektur MVVM.",
     },
   ];
 
@@ -64,11 +64,11 @@ export default function AboutSection() {
             About
           </div>
           <h2 className="font-display font-black text-[clamp(2rem,5vw,3.5rem)] leading-[1.1] tracking-tight text-foreground max-w-4xl">
-            REDEFINING{" "}
-            <span className="text-accent italic">DIGITAL,</span>
+            BUILDING{" "}
+            <span className="text-accent italic">DIGITAL PRODUCTS,</span>
             <br />
             ENGINEERING{" "}
-            <span className="text-accent italic">SOLUTIONS,</span>
+            <span className="text-accent italic">WEB SOLUTIONS,</span>
             <br />
             DELIVERING{" "}
             <span className="text-text-secondary">IMPACT.</span>
@@ -83,10 +83,10 @@ export default function AboutSection() {
               <div className="flex items-center justify-between pb-4 border-b border-border mb-5">
                 <div className="font-mono text-[10px] text-text-dim uppercase tracking-widest flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-                  PROFILE
+                  PROFESSIONAL PROFILE
                 </div>
                 <span className="font-mono text-[10px] text-accent px-2 py-0.5 rounded border border-accent/30 bg-accent/10">
-                  VERIFIED
+                  AVAILABLE
                 </span>
               </div>
 
@@ -110,7 +110,7 @@ export default function AboutSection() {
                     {profile.name}
                   </h3>
                   <p className="text-xs text-accent font-mono mt-0.5">
-                    Full Stack Dev & SEO Specialist
+                    Full Stack Developer & SEO Specialist
                   </p>
                   <div className="flex items-center justify-center sm:justify-start gap-1.5 text-xs text-text-dim mt-2">
                     <MapPin className="w-3.5 h-3.5 text-accent" />
@@ -118,14 +118,16 @@ export default function AboutSection() {
                   </div>
                   <div className="flex items-center justify-center sm:justify-start gap-1.5 text-xs text-text-dim mt-1">
                     <GraduationCap className="w-3.5 h-3.5 text-accent" />
-                    <span>UNESA · IPK 3.84</span>
+                    <span>UNESA · GPA 3.84/4.00</span>
                   </div>
                 </div>
               </div>
 
               {/* Bio summary */}
               <p className="text-text-secondary leading-relaxed text-sm mb-5">
-                Lulusan S1 Pendidikan Teknologi Informasi dengan keahlian dalam Full Stack Web Development, SEO berbasis data, dan eksplorasi AI/LLM.
+                Lulusan Pendidikan Teknologi Informasi dari Universitas Negeri
+                Surabaya dengan pengalaman di bidang pengembangan web full
+                stack, SEO teknis, dan integrasi AI/LLM.
               </p>
 
               {/* Key Credentials */}
@@ -133,14 +135,14 @@ export default function AboutSection() {
                 <div className="p-2.5 rounded-lg border border-border bg-surface/40 flex items-center gap-2">
                   <Award className="w-4 h-4 text-accent shrink-0" />
                   <div className="min-w-0">
-                    <div className="font-mono text-[9px] text-text-dim uppercase">Prestasi</div>
-                    <div className="text-xs font-semibold text-foreground truncate">LIDM Top 20</div>
+                    <div className="font-mono text-[9px] text-text-dim uppercase">Pencapaian</div>
+                    <div className="text-xs font-semibold text-foreground truncate">Finalis 20 Besar LIDM</div>
                   </div>
                 </div>
                 <div className="p-2.5 rounded-lg border border-border bg-surface/40 flex items-center gap-2">
                   <Award className="w-4 h-4 text-text-secondary shrink-0" />
                   <div className="min-w-0">
-                    <div className="font-mono text-[9px] text-text-dim uppercase">Riset</div>
+                    <div className="font-mono text-[9px] text-text-dim uppercase">Publikasi</div>
                     <div className="text-xs font-semibold text-foreground truncate">IEEE & SINTA 4</div>
                   </div>
                 </div>
@@ -153,8 +155,9 @@ export default function AboutSection() {
                     Fokus Saat Ini
                   </p>
                   <p className="mt-1 text-xs leading-relaxed text-text-secondary">
-                    Merancang produk digital yang cepat, mudah digunakan, dan
-                    bertumbuh lewat strategi berbasis data.
+                    Mengembangkan produk digital yang andal, mudah digunakan,
+                    dan mendukung pertumbuhan bisnis melalui strategi berbasis
+                    data.
                   </p>
                 </div>
               </div>
@@ -189,7 +192,7 @@ export default function AboutSection() {
 
                   <div className="mt-4 pt-3 border-t border-border/50 flex items-center justify-between text-[11px] font-mono text-text-dim">
                     <span>0{index + 1}</span>
-                    <span className="text-accent font-semibold">ACTIVE</span>
+                    <span className="text-accent font-semibold">SPECIALTY</span>
                   </div>
                 </TiltCard>
               </div>

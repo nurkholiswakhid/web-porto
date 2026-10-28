@@ -16,7 +16,7 @@ export default function ExperienceSection() {
       ref={sectionRef}
       id="experience"
       className="relative"
-      aria-label="Professional journey"
+      aria-label="Professional experience"
     >
       <div className="section-container">
         <div className="reveal mb-12">
@@ -25,11 +25,12 @@ export default function ExperienceSection() {
             Experience
           </div>
           <h2 className="font-display font-black text-[clamp(2rem,5vw,3.5rem)] leading-[1.1] tracking-tight text-foreground">
-            CAREER{" "}
-            <span className="text-accent italic">TIMELINE</span>
+            PROFESSIONAL{" "}
+            <span className="text-accent italic">EXPERIENCE</span>
           </h2>
           <p className="section-subtitle mt-4">
-            Tracing the trajectory of growth across the digital universe.
+            Experience in web development, technical SEO, and mobile
+            application engineering.
           </p>
         </div>
 
@@ -64,7 +65,7 @@ export default function ExperienceSection() {
                 <TiltCard
                   maxTilt={4}
                   scale={1.01}
-                  dataCursor="EXP"
+                  dataCursor="WORK"
                   className="cosmic-card"
                 >
                   <div className="flex items-start gap-3 mb-3">
@@ -111,7 +112,7 @@ export default function ExperienceSection() {
                   {exp.achievements && exp.achievements.length > 0 && (
                     <div className="mt-4 pt-3 border-t border-border">
                       <div className="font-mono text-[10px] text-accent tracking-wider uppercase mb-2">
-                        Achievements
+                        Key Contributions
                       </div>
                       {exp.achievements.map((ach, i) => (
                         <p key={i} className="text-sm text-accent/80">

@@ -694,6 +694,9 @@ export default function AstronautIntroSection() {
       }
 
       let transitionDistance = 0;
+      let mobileCenterDistance = 0;
+      let mobileTargetHeight = 0;
+      let mobileGeometryScrollY = 0;
       const readSourceRect = () => {
         gsap.set(astronaut, {
           x: 0,
@@ -706,6 +709,17 @@ export default function AstronautIntroSection() {
         gsap.set(heroSection, { clearProps: "transform" });
         transitionDistance = getTransitionDistance();
         readSourceRect();
+        if (isMobileLayout()) {
+          const sourceRect = astronaut.getBoundingClientRect();
+          const targetRect = target.getBoundingClientRect();
+          mobileCenterDistance =
+            targetRect.top +
+            targetRect.height / 2 -
+            sourceRect.top -
+            sourceRect.height / 2;
+          mobileTargetHeight = targetRect.height;
+          mobileGeometryScrollY = window.scrollY;
+        }
       };
       const moveSharedElement = (progress: number) => {
         if (isMobileLayout()) return;
@@ -731,18 +745,13 @@ export default function AstronautIntroSection() {
         const mobileLayout = isMobileLayout();
         let mobileAstronautOpacity = 1 - handoff;
         if (mobileLayout) {
-          const sourceRect = astronaut.getBoundingClientRect();
-          const targetRect = target.getBoundingClientRect();
           const centerDistance =
-            targetRect.top +
-            targetRect.height / 2 -
-            sourceRect.top -
-            sourceRect.height / 2;
+            mobileCenterDistance - (window.scrollY - mobileGeometryScrollY);
           mobileAstronautOpacity = gsap.utils.clamp(
             0,
             1,
-            (centerDistance + targetRect.height * 0.04) /
-              (targetRect.height * 0.12)
+            (centerDistance + mobileTargetHeight * 0.04) /
+              (mobileTargetHeight * 0.12)
           );
         }
         const introOpacity =
@@ -763,8 +772,12 @@ export default function AstronautIntroSection() {
 
       gsap.set(target, { autoAlpha: 0 });
       target.dataset.heroTransitionActive = "true";
-      const notifyTransitionState = () =>
+      const setTransitionActive = (active: boolean) => {
+        const nextState = String(active);
+        if (target.dataset.heroTransitionActive === nextState) return;
+        target.dataset.heroTransitionActive = nextState;
         target.dispatchEvent(new Event("hero-transition-state-change"));
+      };
       readTransitionGeometry();
       moveSharedElement(0);
       setHandoff(0);
@@ -781,24 +794,18 @@ export default function AstronautIntroSection() {
             readTransitionGeometry();
             moveSharedElement(self.progress);
             setHandoff(self.progress);
-            target.dataset.heroTransitionActive =
-              self.progress < 1 ? "true" : "false";
-            notifyTransitionState();
+            setTransitionActive(self.progress < 1);
           },
           onUpdate: (self) => {
             moveSharedElement(self.progress);
             setHandoff(self.progress);
-            target.dataset.heroTransitionActive =
-              self.progress < 1 ? "true" : "false";
-            notifyTransitionState();
+            setTransitionActive(self.progress < 1);
           },
           onLeave: () => {
-            target.dataset.heroTransitionActive = "false";
-            notifyTransitionState();
+            setTransitionActive(false);
           },
           onEnterBack: () => {
-            target.dataset.heroTransitionActive = "true";
-            notifyTransitionState();
+            setTransitionActive(true);
           },
         },
       });
@@ -826,12 +833,14 @@ export default function AstronautIntroSection() {
       resizeObserver = new ResizeObserver(refresh);
       resizeObserver.observe(section);
       resizeObserver.observe(target);
+      window.addEventListener("resize", refresh);
       window.addEventListener("load", refresh, { once: true });
     }, section);
 
     return () => {
       resizeObserver?.disconnect();
       if (refreshOnLoad) {
+        window.removeEventListener("resize", refreshOnLoad);
         window.removeEventListener("load", refreshOnLoad);
       }
       context.revert();
@@ -928,7 +937,7 @@ export default function AstronautIntroSection() {
         >
           <img
             src={assetPath("images/tubuh.png")}
-            alt="Nur Kholis Wakhid wearing an astronaut helmet"
+            alt="Portrait of Nur Kholis Wakhid"
             className="absolute inset-0 z-[1] h-full w-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.65)] lg:object-fill"
             style={{
               maskImage:
@@ -961,7 +970,7 @@ export default function AstronautIntroSection() {
           className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-center transition-opacity duration-300"
         >
           <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-text-secondary">
-            Scroll to enter orbit
+            Scroll to explore my work
           </span>
           <ArrowDown className="h-4 w-4 animate-bounce text-accent" />
         </div>

@@ -38,7 +38,8 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-sm text-text-secondary leading-relaxed max-w-xs">
-              Full Stack Web Developer & SEO Specialist — Building digital solutions.
+              Full Stack Web Developer and SEO Specialist focused on reliable
+              applications and measurable search growth.
             </p>
           </div>
 
@@ -66,7 +67,7 @@ export default function Footer() {
           {/* Social */}
           <div>
             <h3 className="font-mono text-xs text-text-dim uppercase tracking-widest mb-4">
-              Connect
+              Contact
             </h3>
             <div className="flex gap-3">
               {socials.map((social) => (

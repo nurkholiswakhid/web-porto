@@ -3,16 +3,16 @@ import { Project } from "./types";
 export const projects: Project[] = [
   {
     slug: "belajarproperti-platform",
-    title: "BelajarProperti.co.id — Property Training & Marketing",
+    title: "BelajarProperti.co.id — Property Learning Platform",
     category: "web",
     year: 2025,
     summary:
-      "Platform web terintegrasi untuk pemasaran properti dan program pelatihan digital dengan sistem manajemen konten andal.",
-    role: "Full Stack Web Developer & SEO",
+      "Platform web untuk mendukung pemasaran properti dan penyelenggaraan program pelatihan digital.",
+    role: "Full Stack Web Developer & SEO Specialist",
     problem:
-      "Kebutuhan platform terpusat untuk mengelola leads properti, pendaftaran pelatihan, dan performa SEO yang optimal di Google.",
+      "Diperlukan platform terpusat untuk mendukung pengelolaan pemasaran properti, pendaftaran pelatihan, dan visibilitas pencarian.",
     outcome:
-      "Aplikasi web end-to-end dengan REST API, arsitektur database MySQL yang efisien, dan optimasi Core Web Vitals untuk konversi tinggi.",
+      "Mengembangkan aplikasi web menyeluruh dengan REST API, basis data MySQL, dan optimasi Core Web Vitals.",
     tech: [
       "Laravel",
       "PHP",
@@ -22,63 +22,63 @@ export const projects: Project[] = [
       "On-Page SEO",
       "Core Web Vitals",
     ],
-    thumbnail: "/images/projects/eventnesia.png",
-    thumbnailAlt: "Eventnesia platform interface",
+    thumbnail: "/images/projects/belajarproperti.jpg",
+    thumbnailAlt: "BelajarProperti platform interface",
     featured: true,
   },
   {
     slug: "griyaone-realty",
-    title: "GriyaOne.id — Digital Real Estate Solution",
+    title: "GriyaOne.id — Real Estate Platform",
     category: "web",
     year: 2025,
     summary:
-      "Website listing dan direktori real estate modern dengan pengalaman pencarian properti yang cepat dan responsif.",
+      "Situs listing dan direktori properti dengan fitur pencarian yang responsif.",
     role: "Full Stack Developer",
     problem:
-      "Pencarian listing properti membutuhkan kecepatan loading instan dan navigasi antarmuka yang ramah pengguna di perangkat mobile.",
+      "Pengguna memerlukan proses pencarian listing yang cepat dan navigasi yang mudah digunakan pada perangkat mobile.",
     outcome:
-      "Platform properti dengan arsitektur responsif, indexing SEO otomatis, dan sistem filtering data interaktif.",
+      "Membangun platform properti responsif dengan pengindeksan SEO dan fitur penyaringan listing.",
     tech: ["Laravel", "PHP", "MySQL", "JavaScript", "REST API", "SEO"],
-    thumbnail: "/images/projects/moled.png",
-    thumbnailAlt: "MOLED Smart Monitoring System interface",
+    thumbnail: "/images/projects/griyaone.jpg",
+    thumbnailAlt: "GriyaOne.id platform",
     featured: true,
   },
   {
     slug: "brighton-seo-automation",
-    title: "Brighton Real Estate — Automated SEO & SERP Engine",
+    title: "Brighton Real Estate — SEO Data Automation",
     category: "seo",
     year: 2024,
     summary:
-      "Pipeline otomasi berbasis Python untuk web scraping, analisis ranking SERP, metadata, dan deteksi keyword cannibalization.",
+      "Otomasi Python untuk pengumpulan data web, analisis hasil pencarian, pemeriksaan metadata, dan identifikasi keyword cannibalization.",
     role: "SEO Specialist & Automation Developer",
     problem:
-      "Ribuan listing properti memerlukan audit SEO berkala dan analisis kompetitor yang memakan waktu jika dilakukan secara manual.",
+      "Audit SEO dan analisis kompetitor untuk listing dalam jumlah besar memerlukan proses yang lebih efisien.",
     outcome:
-      "Otomasi scraping dan data processing Python yang mempercepat diagnosis keyword cannibalization dan audit on-page SEO.",
+      "Mengembangkan otomasi Python untuk pengumpulan dan pengolahan data guna mendukung audit SEO on-page dan analisis keyword cannibalization.",
     tech: [
       "Python",
       "Google Search Console",
       "Google Analytics",
       "Ahrefs",
       "Semrush",
-      "Web Scraping",
+      "Web Scraping", 
     ],
-    thumbnail: "",
+    thumbnail: "/images/projects/BrightonRealEstate.jpg",
     thumbnailAlt: "SEO Analytics Dashboard showing performance metrics",
     featured: true,
   },
   {
     slug: "flexwing-gamification",
-    title: "Flexwing — Gamified CSS Learning (IEEE Published)",
+    title: "Flexwing — CSS Flexbox Learning Platform",
     category: "edtech",
     year: 2024,
     summary:
-      "Platform gamifikasi edukasi interaktif untuk meningkatkan motivasi dan pemahaman siswa dalam mempelajari CSS Flexbox.",
+      "Platform pembelajaran interaktif berbasis gamifikasi untuk materi CSS Flexbox.",
     role: "Lead Researcher & Developer",
     problem:
-      "Siswa kejuruan sering kesulitan memahami konsep layout CSS Flexbox dengan metode pembelajaran konvensional.",
+      "Materi CSS Flexbox membutuhkan pendekatan pembelajaran yang lebih interaktif dan mudah dipahami.",
     outcome:
-      "Hasil riset dan implementasi platform gamifikasi berhasil dipublikasikan di IEEE serta meningkatkan retensi belajar siswa secara signifikan.",
+      "Penelitian dan pengembangan platform dipublikasikan dalam prosiding konferensi IEEE.",
     tech: [
       "JavaScript",
       "HTML5",
@@ -86,7 +86,7 @@ export const projects: Project[] = [
       "Gamification Design",
       "IEEE Research",
     ],
-    thumbnail: "",
+    thumbnail: "/images/projects/flexwing.jpg",
     thumbnailAlt: "Flexwing Gamification CSS Interface",
     featured: true,
   },
@@ -96,12 +96,12 @@ export const projects: Project[] = [
     category: "mobile",
     year: 2024,
     summary:
-      "Aplikasi Android native kolaboratif yang mengintegrasikan model Machine Learning dan arsitektur Cloud Computing.",
+      "Aplikasi Android native yang dikembangkan secara kolaboratif dengan integrasi machine learning dan cloud computing.",
     role: "Android Mobile Developer (Bangkit Cohort Batch 2)",
     problem:
-      "Membangun aplikasi mobile cerdas yang menghubungkan inferensi model ML di cloud dengan pengalaman pengguna mobile yang mulus.",
+      "Mengintegrasikan inferensi model machine learning berbasis cloud ke dalam aplikasi Android.",
     outcome:
-      "Aplikasi Android tangguh dengan arsitektur MVVM, Kotlin Coroutines, dan integrasi backend Firebase.",
+      "Mengembangkan aplikasi Android menggunakan Kotlin, arsitektur MVVM, Kotlin Coroutines, dan Firebase.",
     tech: [
       "Android Studio",
       "Kotlin",
@@ -110,22 +110,22 @@ export const projects: Project[] = [
       "REST API",
       "Coroutines",
     ],
-    thumbnail: "",
+    thumbnail: "/images/projects/bangkit.png",
     thumbnailAlt: "Android Mobile App Interface",
     featured: true,
   },
   {
     slug: "topic-modeling-lda",
-    title: "Topic Modeling LDA & Sentiment Mining (SINTA 4)",
+    title: "LDA Topic Modeling — Public Opinion Analysis",
     category: "ai",
     year: 2025,
     summary:
-      "Sistem NLP dan Topic Modeling berbasis Latent Dirichlet Allocation (LDA) untuk menganalisis persepsi publik pada komentar YouTube.",
-    role: "Data Scientist & AI Researcher",
+      "Analisis persepsi publik dari komentar YouTube menggunakan NLP dan Latent Dirichlet Allocation (LDA).",
+    role: "Researcher & Data Analyst",
     problem:
-      "Data opini publik berukuran masif di YouTube memerlukan ekstraksi topik dan clustering sentimen secara objektif dan terukur.",
+      "Volume komentar publik yang besar memerlukan metode terstruktur untuk mengidentifikasi topik pembahasan.",
     outcome:
-      "Pipeline ekstraksi data, preprocessing teks, dan pemodelan topik LDA yang berhasil dipublikasikan di jurnal nasional terakreditasi SINTA 4.",
+      "Mengembangkan alur ekstraksi data, prapemrosesan teks, dan pemodelan topik yang dipublikasikan dalam jurnal nasional terakreditasi SINTA 4.",
     tech: [
       "Python",
       "NLP",
@@ -133,7 +133,7 @@ export const projects: Project[] = [
       "YouTube API",
       "Data Processing",
     ],
-    thumbnail: "",
+    thumbnail: "/images/projects/LDATopicModeling.jpg",
     thumbnailAlt: "Topic Modeling and Data Extraction Dashboard",
     featured: true,
   },
