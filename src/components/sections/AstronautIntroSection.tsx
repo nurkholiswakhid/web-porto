@@ -708,9 +708,9 @@ export default function AstronautIntroSection() {
         readSourceRect();
       };
       const moveSharedElement = (progress: number) => {
-        gsap.set(astronaut, { x: 0, y: 0, scale: 1 });
         if (isMobileLayout()) return;
 
+        gsap.set(astronaut, { x: 0, y: 0, scale: 1 });
         const sourceRect = astronaut.getBoundingClientRect();
         const targetRect = target.getBoundingClientRect();
         const sourceCenterX = sourceRect.left + sourceRect.width / 2;
@@ -728,15 +728,37 @@ export default function AstronautIntroSection() {
       };
       const setHandoff = (progress: number) => {
         const handoff = gsap.utils.clamp(0, 1, (progress - 0.88) / 0.12);
+        const mobileLayout = isMobileLayout();
+        let mobileAstronautOpacity = 1 - handoff;
+        if (mobileLayout) {
+          const sourceRect = astronaut.getBoundingClientRect();
+          const targetRect = target.getBoundingClientRect();
+          const centerDistance =
+            targetRect.top +
+            targetRect.height / 2 -
+            sourceRect.top -
+            sourceRect.height / 2;
+          mobileAstronautOpacity = gsap.utils.clamp(
+            0,
+            1,
+            (centerDistance + targetRect.height * 0.04) /
+              (targetRect.height * 0.12)
+          );
+        }
         const introOpacity =
           1 - gsap.utils.clamp(0, 1, progress / 0.18);
+        const heroOpacity = mobileLayout
+          ? 1 - mobileAstronautOpacity
+          : handoff;
         gsap.set([introName, introOrbit, introGround], {
           autoAlpha: introOpacity,
         });
         gsap.set(astronaut, {
-          autoAlpha: isMobileLayout() ? introOpacity : 1 - handoff,
+          autoAlpha: mobileLayout
+            ? mobileAstronautOpacity
+            : 1 - handoff,
         });
-        gsap.set(target, { autoAlpha: handoff });
+        gsap.set(target, { autoAlpha: heroOpacity });
       };
 
       gsap.set(target, { autoAlpha: 0 });
@@ -753,7 +775,7 @@ export default function AstronautIntroSection() {
           trigger: section,
           start: "top top",
           end: () => `+=${transitionDistance || getTransitionDistance()}`,
-          scrub: 0.55,
+          scrub: isMobileLayout() ? true : 0.55,
           invalidateOnRefresh: true,
           onRefresh: (self) => {
             readTransitionGeometry();
