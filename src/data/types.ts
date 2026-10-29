@@ -41,7 +41,7 @@ export interface Experience {
 export type ProjectCategory = "seo" | "web" | "mobile" | "edtech" | "ai";
 
 export const PROJECT_CATEGORY_LABELS: Record<ProjectCategory, string> = {
-  seo: "SEO & Technical SEO",
+  seo: "Technical SEO",
   web: "Web Development",
   mobile: "Mobile Development",
   edtech: "Education Technology",

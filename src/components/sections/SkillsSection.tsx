@@ -12,7 +12,6 @@ import {
 } from "lucide-react";
 import { skills } from "@/data/skills";
 import { useReveal } from "@/hooks/useReveal";
-import TiltCard from "@/components/effects/TiltCard";
 
 const ICON_MAP: Record<string, React.ReactNode> = {
   Search: <Search className="w-5 h-5" />,
@@ -50,64 +49,43 @@ export default function SkillsSection() {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {skills.map((category, index) => (
-            <div
+            <article
               key={category.category}
-              className="reveal"
-              style={{ transitionDelay: `${index * 100}ms` }}
+              className="relative h-full overflow-hidden rounded-2xl border border-border bg-surface/50 p-5"
             >
-              <TiltCard
-                maxTilt={5}
-                scale={1.01}
-                dataCursor="TECH"
-                className="cosmic-card h-full group"
-              >
-                {/* Category header */}
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="w-10 h-10 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center text-accent group-hover:bg-accent/20 transition-colors">
-                    {ICON_MAP[category.icon] || <Code className="w-5 h-5" />}
+              <div
+                className="absolute left-5 top-0 h-0.5 w-10 bg-accent/70"
+                aria-hidden="true"
+              />
+              <div className="mb-4 flex items-center justify-between gap-3">
+                <div className="flex min-w-0 items-center gap-3">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-accent/20 bg-accent/10 text-accent">
+                    {ICON_MAP[category.icon] || <Code className="h-5 w-5" />}
                   </div>
-                  <h3 className="text-base font-display font-bold text-foreground group-hover:text-accent transition-colors">
+                  <h3 className="font-display text-base font-bold leading-snug text-foreground">
                     {category.category}
                   </h3>
                 </div>
+                <span className="shrink-0 font-mono text-[10px] tracking-wider text-text-dim">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+              </div>
 
-                {/* Skill items */}
-                <div className="space-y-2">
-                  {category.items.map((skill) => (
-                    <div
-                      key={skill}
-                      className="flex items-center gap-3 p-2 rounded-lg hover:bg-bg-secondary/50 transition-colors"
-                    >
-                      <div className="w-1.5 h-1.5 rounded-full bg-accent/40" />
-                      <span className="text-sm text-text-secondary">
-                        {skill}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </TiltCard>
-            </div>
-          ))}
-        </div>
-
-        {/* Tools strip */}
-        <div className="reveal mt-12">
-          <div className="hud-panel">
-            <div className="font-mono text-[10px] text-text-dim uppercase tracking-widest mb-4">
-              Core Technologies
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {skills
-                .flatMap((c) => c.items)
-                .map((tool) => (
-                  <span key={tool} className="tech-badge">
-                    {tool}
-                  </span>
+              <div className="mb-4 h-px bg-border" aria-hidden="true" />
+              <ul className="flex flex-wrap gap-2">
+                {category.items.map((skill) => (
+                  <li
+                    key={skill}
+                    className="rounded-lg border border-border/80 bg-bg-secondary/70 px-2.5 py-1.5 text-xs leading-relaxed text-text-secondary"
+                  >
+                    {skill}
+                  </li>
                 ))}
-            </div>
-          </div>
+              </ul>
+            </article>
+          ))}
         </div>
       </div>
     </section>

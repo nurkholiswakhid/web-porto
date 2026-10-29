@@ -1,15 +1,12 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { ExternalLink, Eye } from "lucide-react";
-import { GithubIcon } from "@/components/ui/SocialIcons";
+import { Eye } from "lucide-react";
 import { projects } from "@/data/projects";
 import { PROJECT_CATEGORY_LABELS, ProjectCategory } from "@/data/types";
 import { cn, assetPath } from "@/lib/utils";
 import { useReveal } from "@/hooks/useReveal";
 import { soundFx } from "@/lib/audio";
-import MissionGallery from "@/components/effects/MissionGallery";
-import TiltCard from "@/components/effects/TiltCard";
 
 const ALL_CATEGORIES: ("all" | ProjectCategory)[] = [
   "all",
@@ -21,7 +18,7 @@ const ALL_CATEGORIES: ("all" | ProjectCategory)[] = [
 ];
 
 const CATEGORY_DISPLAY: Record<string, string> = {
-  all: "All",
+  all: "All projects",
   ...PROJECT_CATEGORY_LABELS,
 };
 
@@ -45,7 +42,6 @@ export default function ProjectsSection() {
       aria-label="Featured projects"
     >
       <div className="section-container">
-        {/* Lando-style big headline */}
         <div className="reveal mb-12">
           <div className="section-label">
             <span className="w-1.5 h-1.5 bg-accent rounded-full" />
@@ -61,56 +57,61 @@ export default function ProjectsSection() {
           </p>
         </div>
 
-        {/* Horizontal Mission Gallery */}
-        <div className="reveal mb-12">
-          <MissionGallery />
+        <div
+          className="reveal -mx-4 mb-8 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0"
+          aria-label="Filter projects by category"
+          role="group"
+        >
+          <div className="flex w-max min-w-full gap-2">
+            {ALL_CATEGORIES.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => {
+                  soundFx.playClick();
+                  setActiveFilter(cat);
+                }}
+                onMouseEnter={() => soundFx.playHover()}
+                className={cn(
+                  "shrink-0 rounded-full border px-4 py-2 text-xs font-medium transition-colors cursor-pointer",
+                  activeFilter === cat
+                    ? "border-accent bg-accent text-bg"
+                    : "border-border bg-surface/50 text-text-secondary hover:border-accent/40 hover:text-foreground"
+                )}
+                aria-pressed={activeFilter === cat}
+              >
+                {CATEGORY_DISPLAY[cat]}
+              </button>
+            ))}
+          </div>
         </div>
 
-        {/* Category Filter */}
-        <div className="reveal flex flex-wrap gap-2 mb-10">
-          {ALL_CATEGORIES.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => {
-                soundFx.playClick();
-                setActiveFilter(cat);
-              }}
-              onMouseEnter={() => soundFx.playHover()}
-              className={cn(
-                "px-4 py-2 rounded-lg font-mono text-xs transition-all duration-200 cursor-pointer",
-                activeFilter === cat
-                  ? "bg-accent text-bg font-bold border border-accent"
-                  : "bg-surface/50 text-text-secondary border border-border hover:border-accent/30 hover:text-foreground"
-              )}
-            >
-              {CATEGORY_DISPLAY[cat]}
-            </button>
-          ))}
+        <div
+          aria-live="polite"
+          className="reveal mb-5 text-xs font-mono text-text-dim"
+        >
+          {filteredProjects.length}{" "}
+          {filteredProjects.length === 1 ? "project" : "projects"}
+          {activeFilter !== "all" &&
+            ` · ${PROJECT_CATEGORY_LABELS[activeFilter]}`}
         </div>
 
-        {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjects.map((project, index) => (
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {filteredProjects.map((project) => (
             <div
               key={project.slug}
-              className="reveal h-full"
-              style={{ transitionDelay: `${index * 80}ms` }}
+              className="h-full"
             >
-              <TiltCard
-                maxTilt={6}
-                scale={1.015}
-                dataCursor="PROJECT"
-                className="h-full border border-border bg-surface/60 backdrop-blur-md rounded-2xl overflow-hidden hover:border-accent/30 group"
-              >
-                <div className="p-5 h-full flex flex-col justify-between">
-                  <div>
+              <article className="h-full overflow-hidden rounded-2xl border border-border bg-surface/60">
+                <div className="flex h-full flex-col p-4 sm:p-5">
+                  <div className="flex flex-1 flex-col">
                     {/* Thumbnail */}
-                    <div className="relative h-44 rounded-xl overflow-hidden mb-4 bg-bg-secondary border border-border">
+                    <div className="relative mb-4 aspect-[16/10] overflow-hidden rounded-xl border border-border bg-bg-secondary">
                       {project.thumbnail && !imgErrors[project.slug] ? (
                         <img
                           src={assetPath(project.thumbnail)}
                           alt={project.thumbnailAlt || project.title}
-                          className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                          className="h-full w-full object-cover object-top"
+                          loading="lazy"
                           onError={() => {
                             setImgErrors((prev) => ({
                               ...prev,
@@ -119,68 +120,42 @@ export default function ProjectsSection() {
                           }}
                         />
                       ) : (
-                        <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-surface to-surface flex items-center justify-center">
+                        <div className="absolute inset-0 flex items-center justify-center bg-surface">
                           <div className="text-center">
-                            <div className="w-12 h-12 mx-auto mb-2 rounded-full bg-accent/15 border border-accent/25 flex items-center justify-center">
+                            <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full border border-border bg-bg-secondary">
                               <Eye className="w-5 h-5 text-accent" />
                             </div>
-                            <span className="font-mono text-[10px] text-text-dim">
+                            <span className="px-3 font-mono text-[10px] text-text-dim">
                               {PROJECT_CATEGORY_LABELS[project.category]}
                             </span>
                           </div>
                         </div>
                       )}
 
-                      {/* Hover overlay */}
-                      <div className="absolute inset-0 bg-bg/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
-                        {project.demoUrl && (
-                          <a
-                            href={project.demoUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2.5 rounded-lg bg-accent/20 border border-accent/40 hover:bg-accent/40 text-foreground transition-colors"
-                            aria-label={`View demo for ${project.title}`}
-                          >
-                            <ExternalLink className="w-4 h-4 text-accent" />
-                          </a>
-                        )}
-                        {project.repoUrl && (
-                          <a
-                            href={project.repoUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2.5 rounded-lg bg-foreground/10 border border-foreground/30 hover:bg-foreground/20 text-foreground transition-colors"
-                            aria-label={`View source for ${project.title}`}
-                          >
-                            <GithubIcon className="w-4 h-4" />
-                          </a>
-                        )}
-                      </div>
-
                       {/* Year badge */}
-                      <div className="absolute top-3 right-3 px-2 py-0.5 rounded-md bg-bg/75 backdrop-blur border border-border font-mono text-[10px] text-text-dim">
+                      <div className="absolute top-3 right-3 rounded-md border border-border bg-bg/90 px-2 py-0.5 font-mono text-[10px] text-text-dim">
                         {project.year}
                       </div>
                     </div>
 
                     {/* Category tag */}
                     <div className="mb-2">
-                      <span className="tech-badge text-[10px]">
+                      <span className="tech-badge inline-flex text-[10px]">
                         {PROJECT_CATEGORY_LABELS[project.category]}
                       </span>
                     </div>
 
-                    <h3 className="text-base font-display font-bold text-foreground mb-2 group-hover:text-accent transition-colors">
+                    <h3 className="mb-2 font-display text-base font-bold leading-snug text-foreground">
                       {project.title}
                     </h3>
 
-                    <p className="text-sm text-text-secondary leading-relaxed mb-3">
+                    <p className="mb-4 text-sm leading-relaxed text-text-secondary">
                       {project.summary}
                     </p>
 
                     {/* Expandable detail */}
                     {expandedProject === project.slug && (
-                      <div className="mb-3 p-3 rounded-xl bg-bg-secondary/70 border border-border text-xs space-y-2 animate-fade-in">
+                      <div className="mb-4 space-y-3 rounded-xl border border-border bg-bg-secondary p-3 text-xs">
                         <div>
                           <span className="font-mono text-[10px] text-text-dim uppercase">Contribution:</span>
                           <p className="text-text-secondary font-medium">{project.role}</p>
@@ -197,7 +172,7 @@ export default function ProjectsSection() {
                     )}
                   </div>
 
-                  <div>
+                  <div className="mt-auto">
                     <button
                       onClick={() => {
                         soundFx.playClick();
@@ -205,7 +180,8 @@ export default function ProjectsSection() {
                           expandedProject === project.slug ? null : project.slug
                         );
                       }}
-                      className="text-xs text-accent hover:text-foreground transition-colors font-mono mb-3 text-left cursor-pointer"
+                      className="mb-3 cursor-pointer text-left font-mono text-xs font-medium text-accent hover:underline"
+                      aria-expanded={expandedProject === project.slug}
                     >
                       {expandedProject === project.slug
                         ? "← Hide project details"
@@ -225,7 +201,7 @@ export default function ProjectsSection() {
                     </div>
                   </div>
                 </div>
-              </TiltCard>
+              </article>
             </div>
           ))}
         </div>

@@ -30,7 +30,7 @@ export const projects: Project[] = [
     slug: "griyaone-realty",
     title: "GriyaOne.id — Real Estate Platform",
     category: "web",
-    year: 2025,
+    year: 2026,
     summary:
       "Situs listing dan direktori properti dengan fitur pencarian yang responsif.",
     role: "Full Stack Developer",
@@ -47,7 +47,7 @@ export const projects: Project[] = [
     slug: "brighton-seo-automation",
     title: "Brighton Real Estate — SEO Data Automation",
     category: "seo",
-    year: 2024,
+    year: 2026,
     summary:
       "Otomasi Python untuk pengumpulan data web, analisis hasil pencarian, pemeriksaan metadata, dan identifikasi keyword cannibalization.",
     role: "SEO Specialist & Automation Developer",
@@ -118,7 +118,7 @@ export const projects: Project[] = [
     slug: "topic-modeling-lda",
     title: "LDA Topic Modeling — Public Opinion Analysis",
     category: "ai",
-    year: 2025,
+    year: 2026,
     summary:
       "Analisis persepsi publik dari komentar YouTube menggunakan NLP dan Latent Dirichlet Allocation (LDA).",
     role: "Researcher & Data Analyst",
