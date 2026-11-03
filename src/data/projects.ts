@@ -86,7 +86,7 @@ export const projects: Project[] = [
       "Gamification Design",
       "IEEE Research",
     ],
-    thumbnail: "/images/projects/flexwing.png",
+    thumbnail: "/images/projects/Flexwing.png",
     thumbnailAlt: "Flexwing Gamification CSS Interface",
     featured: true,
   },
