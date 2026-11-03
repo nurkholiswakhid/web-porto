@@ -561,7 +561,7 @@ export default function HeroSection() {
                   </div>
                   <div>
                     <div className="font-mono text-[9px] text-accent font-semibold uppercase tracking-wider">Full Stack Development</div>
-                    <div className="text-[11px] font-semibold text-foreground">Laravel · Next.js · REST APIs</div>
+                    <div className="text-[11px] font-semibold text-foreground">Frontend · Backend · Database · REST APIs · Deployment</div>
                   </div>
                 </div>
               </div>

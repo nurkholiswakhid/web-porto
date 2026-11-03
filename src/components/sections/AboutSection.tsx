@@ -207,7 +207,7 @@ export default function AboutSection() {
           lines={[
             {
               text: "LARAVEL NEXT.JS REACT KOTLIN SEO PYTHON AI LLM",
-              accentWords: ["NEXT.JS", "SEO", "AI"],
+              accentWords: ["Full Stack", "SEO", "AI"],
             },
           ]}
           speed={30}
