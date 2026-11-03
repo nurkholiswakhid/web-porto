@@ -22,7 +22,7 @@ export const projects: Project[] = [
       "On-Page SEO",
       "Core Web Vitals",
     ],
-    thumbnail: "/images/projects/GriyaOne.png",
+    thumbnail: "/images/projects/BelajarProperti.png",
     thumbnailAlt: "BelajarProperti platform interface",
     featured: true,
   },
