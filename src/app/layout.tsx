@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Nur Kholis Wakhid — Full Stack Web Developer & SEO Specialist",
+  metadataBase: new URL("https://nurkholiswakhid.me"),
+  alternates: {
+    canonical: "/",
+  },
+  title: "Nur Kholis Wakhid - Full Stack Web Developer & SEO Specialist",
   description:
     "Portofolio Nur Kholis Wakhid, Full Stack Web Developer dan Technical SEO Specialist di Surabaya, berfokus pada pengembangan web, SEO, dan integrasi AI/LLM.",
   keywords: [
@@ -17,6 +21,7 @@ export const metadata: Metadata = {
     "Portfolio",
   ],
   authors: [{ name: "Nur Kholis Wakhid" }],
+  publisher: "Nur Kholis Wakhid",
   openGraph: {
     title: "Nur Kholis Wakhid — Portfolio",
     description:
