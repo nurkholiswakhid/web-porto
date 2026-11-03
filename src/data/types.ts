@@ -91,7 +91,7 @@ export interface Education {
 export interface Social {
   label: string;
   url: string;
-  kind: "email" | "linkedin" | "github" | "whatsapp";
+  kind: "email" | "linkedin" | "github";
 }
 
 export interface NavItem {

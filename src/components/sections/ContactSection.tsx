@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { Mail, MessageCircle, Download } from "lucide-react";
+import { Mail, Download } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
 import { socials } from "@/data/socials";
 import { profile } from "@/data/profile";
@@ -13,7 +13,6 @@ const ICON_MAP: Record<string, React.ReactNode> = {
   email: <Mail className="w-6 h-6" />,
   linkedin: <LinkedinIcon className="w-6 h-6" />,
   github: <GithubIcon className="w-6 h-6" />,
-  whatsapp: <MessageCircle className="w-6 h-6" />,
 };
 
 export default function ContactSection() {
@@ -76,8 +75,6 @@ export default function ContactSection() {
                 <span className="text-xs text-text-dim font-mono truncate max-w-full px-2">
                   {social.kind === "email"
                     ? social.url.replace("mailto:", "")
-                    : social.kind === "whatsapp"
-                    ? "+62 857-4589-7297"
                     : social.kind.charAt(0).toUpperCase() + social.kind.slice(1)}
                 </span>
               </a>

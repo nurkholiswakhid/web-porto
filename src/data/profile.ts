@@ -10,6 +10,5 @@ export const profile: Profile = {
   avatarUrl: "images/profile.png",
   location: "Surabaya, Jawa Timur, Indonesia",
   email: "nurkholiswakhid@gmail.com",
-  phone: "0857-4589-7297",
   cvPath: "documents/cv.pdf",
 };

@@ -16,10 +16,4 @@ export const socials: Social[] = [
     url: "https://github.com/nurkholiswakhid",
     kind: "github",
   },
-  {
-    label: "WhatsApp",
-    url: "https://wa.me/6285745897297",
-    kind: "whatsapp",
-  },
 ];
-
