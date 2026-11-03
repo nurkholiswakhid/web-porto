@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Nur Kholis Wakhid — Full Stack Web Developer & SEO Specialist",
   description:
-    "Portofolio Nur Kholis Wakhid, Full Stack Web Developer dan Technical SEO Specialist di Surabaya. Berfokus pada aplikasi web yang andal, optimasi pencarian organik, dan integrasi AI/LLM.",
+    "Portofolio Nur Kholis Wakhid, Full Stack Web Developer dan Technical SEO Specialist di Surabaya, berfokus pada pengembangan web, SEO, dan integrasi AI/LLM.",
   keywords: [
     "Nur Kholis Wakhid",
     "Full Stack Web Developer",
