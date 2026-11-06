@@ -74,7 +74,30 @@ export interface SkillCategory {
 export interface Certification {
   name: string;
   issuer: string;
-  issued: string; // "YYYY-MM"
+  issued: string; // "YYYY" or "YYYY-MM"
+  track:
+    | "Analytics & Search"
+    | "Android & Applied AI"
+    | "Programming Fundamentals"
+    | "Cloud & Security"
+    | "IT Support & Networking";
+  topic:
+    | "Analytics"
+    | "Search Ads"
+    | "SEO"
+    | "Android"
+    | "Machine Learning"
+    | "Artificial Intelligence"
+    | "Kotlin"
+    | "Programming Logic"
+    | "Programming"
+    | "Cybersecurity"
+    | "Cloud"
+    | "Networking"
+    | "IT Support";
+  focus: string;
+  credentialLabel: string;
+  linkType: "credential" | "provider";
   expires?: string;
   credentialUrl?: string;
 }

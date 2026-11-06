@@ -405,14 +405,10 @@ export default function HeroSection() {
             </p>
 
             {/* Key Stats */}
-            <div className="grid grid-cols-3 gap-3 w-full max-w-md mb-8">
+            <div className="grid grid-cols-2 gap-3 w-full max-w-md mb-8">
               <div className="p-3 rounded-xl border border-border bg-surface/40 text-center lg:text-left">
                 <div className="font-display text-xl font-bold text-accent">3.84</div>
                 <div className="font-mono text-[10px] text-text-dim">GPA · UNESA</div>
-              </div>
-              <div className="p-3 rounded-xl border border-border bg-surface/40 text-center lg:text-left">
-                <div className="font-display text-xl font-bold text-foreground">Top 20</div>
-                <div className="font-mono text-[10px] text-text-dim">NATIONAL FINALIST</div>
               </div>
               <div className="p-3 rounded-xl border border-border bg-surface/40 text-center lg:text-left">
                 <div className="font-display text-xl font-bold text-accent">IEEE</div>

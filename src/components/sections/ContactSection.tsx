@@ -1,96 +1,155 @@
 "use client";
 
 import { useRef } from "react";
-import { Mail, Download } from "lucide-react";
+import {
+  ArrowUpRight,
+  Download,
+  Mail,
+  MapPin,
+  type LucideIcon,
+} from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
 import { socials } from "@/data/socials";
 import { profile } from "@/data/profile";
+import type { Social } from "@/data/types";
 import { assetPath } from "@/lib/utils";
 import { useReveal } from "@/hooks/useReveal";
-import MarqueeText from "@/components/effects/MarqueeText";
 
-const ICON_MAP: Record<string, React.ReactNode> = {
-  email: <Mail className="w-6 h-6" />,
-  linkedin: <LinkedinIcon className="w-6 h-6" />,
-  github: <GithubIcon className="w-6 h-6" />,
+const SOCIAL_ICONS: Record<
+  Exclude<Social["kind"], "email">,
+  LucideIcon | typeof GithubIcon | typeof LinkedinIcon
+> = {
+  linkedin: LinkedinIcon,
+  github: GithubIcon,
+};
+
+const SOCIAL_DETAILS: Record<Exclude<Social["kind"], "email">, string> = {
+  linkedin: "Professional profile",
+  github: "Code and project work",
 };
 
 export default function ContactSection() {
   const sectionRef = useRef<HTMLElement>(null);
   useReveal(sectionRef);
 
+  const email = socials.find((social) => social.kind === "email");
+  const externalProfiles = socials.filter(
+    (social): social is Social & { kind: "linkedin" | "github" } =>
+      social.kind !== "email",
+  );
+
   return (
     <section
       ref={sectionRef}
       id="contact"
       className="relative"
-      aria-label="Contact"
+      aria-labelledby="contact-heading"
     >
-      {/* Big CTA marquee */}
-      <div className="marquee-divider">
-        <MarqueeText
-          lines={[
-            {
-              text: "LET'S CONNECT LET'S COLLABORATE LET'S CREATE",
-              accentWords: ["CONNECT", "COLLABORATE", "CREATE"],
-            },
-          ]}
-          speed={25}
-        />
-      </div>
-
       <div className="section-container">
-        <div className="max-w-2xl mx-auto text-center">
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           <div className="reveal">
-            <div className="section-label mx-auto w-fit">
-              <span className="w-1.5 h-1.5 bg-accent rounded-full" />
-              Contact Information
+            <div className="section-label">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+              Contact information
             </div>
-            <h2 className="font-display font-black text-[clamp(2rem,5vw,3.5rem)] leading-[1.1] tracking-tight text-foreground text-center">
-              LET&apos;S{" "}
-              <span className="text-accent italic">CONNECT</span>
-            </h2>
-            <p className="section-subtitle mx-auto text-center mt-4 mb-10">
-              Have a project in mind or an opportunity to discuss? Get in
-              touch through your preferred channel.
-            </p>
-          </div>
-
-          {/* Social links grid */}
-          <div className="reveal grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
-            {socials.map((social) => (
-              <a
-                key={social.kind}
-                href={social.url}
-                target={social.kind === "email" ? undefined : "_blank"}
-                rel={social.kind === "email" ? undefined : "noopener noreferrer"}
-                className="cosmic-card flex flex-col items-center gap-3 py-6 group cursor-pointer hover:border-accent/30"
-              >
-                <div className="w-14 h-14 rounded-xl flex items-center justify-center text-accent bg-accent/10 border border-accent/20 group-hover:scale-110 transition-transform">
-                  {ICON_MAP[social.kind]}
-                </div>
-                <span className="text-sm font-medium text-foreground">
-                  {social.label}
-                </span>
-                <span className="text-xs text-text-dim font-mono truncate max-w-full px-2">
-                  {social.kind === "email"
-                    ? social.url.replace("mailto:", "")
-                    : social.kind.charAt(0).toUpperCase() + social.kind.slice(1)}
-                </span>
-              </a>
-            ))}
-          </div>
-
-          {/* CTA */}
-          <div className="reveal">
-            <a
-              href={assetPath(profile.cvPath)}
-              download
-              className="btn-primary mx-auto"
+            <h2
+              id="contact-heading"
+              className="font-display text-[clamp(2.5rem,6vw,4.5rem)] font-black leading-[0.98] tracking-tight text-foreground"
             >
-              <Download className="w-4 h-4" />
-              <span>Download CV</span>
-            </a>
+              LET&apos;S
+              <br />
+              CONNECT
+            </h2>
+            <p className="mt-5 max-w-md text-base leading-relaxed text-text-secondary">
+              Have a project, role, or collaboration in mind? Send me an email
+              and tell me what you&apos;re working on.
+            </p>
+
+            {profile.location && (
+              <p className="mt-6 inline-flex items-center gap-2 text-sm text-text-dim">
+                <MapPin aria-hidden="true" className="h-4 w-4 text-accent" />
+                {profile.location}
+              </p>
+            )}
+
+            <div className="mt-8">
+              <a
+                href={assetPath(profile.cvPath)}
+                download
+                className="btn-secondary min-h-11"
+              >
+                <Download aria-hidden="true" className="h-4 w-4" />
+                <span>Download CV</span>
+              </a>
+            </div>
+          </div>
+
+          <div className="reveal space-y-3">
+            {email && (
+              <a
+                href={email.url}
+                className="group relative flex min-h-36 items-center justify-between gap-5 overflow-hidden rounded-2xl border border-accent/35 bg-accent/[0.07] p-6 transition-colors hover:border-accent/70 hover:bg-accent/[0.11] sm:p-8"
+              >
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -right-8 -top-10 h-40 w-40 rounded-full border border-accent/10"
+                />
+                <span className="relative flex min-w-0 items-center gap-4">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-accent/30 bg-accent/10 text-accent">
+                    <Mail aria-hidden="true" className="h-5 w-5" />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-xs text-text-secondary">
+                      Best way to reach me
+                    </span>
+                    <span className="mt-1 block break-all text-base font-semibold text-foreground sm:text-lg">
+                      {email.url.replace("mailto:", "")}
+                    </span>
+                    <span className="mt-2 block text-sm font-medium text-accent">
+                      Send an email
+                    </span>
+                  </span>
+                </span>
+                <ArrowUpRight
+                  aria-hidden="true"
+                  className="relative h-5 w-5 shrink-0 text-accent transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"
+                />
+              </a>
+            )}
+
+            <div className="grid gap-3 sm:grid-cols-2">
+              {externalProfiles.map((social) => {
+                const Icon = SOCIAL_ICONS[social.kind];
+
+                return (
+                  <a
+                    key={social.kind}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex min-h-24 items-center justify-between gap-3 rounded-xl border border-border bg-surface/40 p-5 transition-colors hover:border-accent/35 hover:bg-surface/70"
+                  >
+                    <span className="flex items-center gap-3">
+                      <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-bg-secondary text-text-secondary transition-colors group-hover:border-accent/25 group-hover:text-accent">
+                        <Icon className="h-5 w-5" />
+                      </span>
+                      <span>
+                        <span className="block font-semibold text-foreground">
+                          {social.label}
+                        </span>
+                        <span className="mt-1 block text-xs text-text-dim">
+                          {SOCIAL_DETAILS[social.kind]}
+                        </span>
+                      </span>
+                    </span>
+                    <ArrowUpRight
+                      aria-hidden="true"
+                      className="h-4 w-4 shrink-0 text-text-dim transition-colors group-hover:text-accent"
+                    />
+                  </a>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
