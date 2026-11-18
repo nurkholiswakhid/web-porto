@@ -7,6 +7,7 @@ export const experiences: Experience[] = [
     location: "Surabaya, Jawa Timur",
     start: "2025-01",
     end: undefined, // Sekarang
+    logoMark: "FW",
     summary: [
       "Mengembangkan dan mengelola situs BelajarProperti.co.id dan GriyaOne.id untuk mendukung pemasaran serta pelatihan di bidang properti.",
       "Membangun aplikasi web menyeluruh, mencakup antarmuka, backend, basis data, dan REST API untuk integrasi sistem.",
@@ -32,6 +33,7 @@ export const experiences: Experience[] = [
     location: "Surabaya, Jawa Timur",
     start: "2024-06",
     end: "2024-09",
+    logo: "images/logo/brighton_logo.png",
     summary: [
       "Menerapkan SEO on-page melalui riset kata kunci, optimasi metadata, struktur heading, dan tautan internal.",
       "Mengembangkan alat otomasi Python untuk web scraping, analisis konten, dan pengolahan data SEO.",
@@ -56,6 +58,7 @@ export const experiences: Experience[] = [
     location: "Indonesia",
     start: "2024-09",
     end: "2025-01",
+    logo: "images/logo/bangkit_logo.png",
     summary: [
       "Mengembangkan aplikasi Android native menggunakan Android Studio, Kotlin, Coroutines, dan Firebase.",
       "Berkolaborasi dalam proyek akhir lintas bidang yang mencakup pengembangan aplikasi mobile, machine learning, dan cloud computing.",
@@ -79,6 +82,7 @@ export const experiences: Experience[] = [
     location: "Surabaya, Jawa Timur",
     start: "2023-07",
     end: "2023-09",
+    logo: "images/logo/ids_logo.png",
     summary: [
       "Melakukan pemeliharaan preventif dan perbaikan perangkat keras maupun perangkat lunak serta memberikan dukungan teknis kepada pengguna.",
       "Mendiagnosis dan menangani kendala jaringan, sistem operasi, dan perangkat pendukung.",

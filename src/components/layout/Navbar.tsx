@@ -263,9 +263,13 @@ export default function Navbar() {
           "fixed bottom-6 right-6 z-40 w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-300 cursor-pointer",
           "bg-surface/90 backdrop-blur-md border border-border",
           "hover:bg-accent/20 hover:border-accent",
-          isScrolled ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
+          isScrolled && activeSection !== "experience"
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-4 pointer-events-none"
         )}
         aria-label="Scroll to top"
+        aria-hidden={activeSection === "experience"}
+        tabIndex={!isScrolled || activeSection === "experience" ? -1 : 0}
       >
         <ChevronUp className="w-5 h-5 text-text-secondary" />
       </button>

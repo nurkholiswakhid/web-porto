@@ -34,6 +34,8 @@ export interface Experience {
   location: string;
   start: string; // "YYYY-MM"
   end?: string; // kosong = masih berjalan
+  logo?: string;
+  logoMark?: string;
   summary: string[];
   tools: string[];
   achievements?: string[]; // hanya yang terverifikasi

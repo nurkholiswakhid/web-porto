@@ -8,7 +8,7 @@ export const publications: Publication[] = [
       "IEEE International Conference",
     year: 2026,
     description:
-      "The livestock sector is a major contributor to greenhouse gas emissions, particularly methane (CH4) from enteric fermentation in ruminants. One way to reduce this impact is through feed formulation tailored to livestock nutritional needs, thus optimizing feed utilization and reducing manure waste. This research aims to develop a prototype website-based livestock feed formulation application called Ternak Kita, utilizing Artificial Intelligence (AI) to assist in feed preparation. The prototype method used includes communication, quick planning, modeling, construction, deployment, and feedback. The developed system features AI-based feed formulation recommendations and a livestock feed recipe library. Testing using the System Usability Scale (SUS) on 20 respondents yielded an average score of 71.25, categorized as “Good,” indicating that the system is quite usable.",
+      "Developed Ternak Kita, an AI-based livestock feed formulation website, achieving a Good usability score of 71.25 (SUS).",
     url: "https://ieeexplore.ieee.org/document/11766347",
   },
   {

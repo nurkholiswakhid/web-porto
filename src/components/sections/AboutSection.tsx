@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRef } from "react";
 import {
   Compass,
@@ -78,7 +79,10 @@ export default function AboutSection() {
         <div className="grid lg:grid-cols-12 gap-8 items-start">
           {/* Left: Crew Dossier (5 cols) */}
           <div className="lg:col-span-5 reveal">
-            <div className="hud-panel p-6">
+            <div
+              className="hud-panel p-6"
+              style={{ backgroundColor: "var(--surface)", backdropFilter: "none" }}
+            >
               {/* Dossier Header */}
               <div className="flex items-center justify-between pb-4 border-b border-border mb-5">
                 <div className="font-mono text-[10px] text-text-dim uppercase tracking-widest flex items-center gap-1.5">
@@ -92,11 +96,14 @@ export default function AboutSection() {
 
               {/* Pilot Avatar & Quick Bio */}
               <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 mb-5">
-                <div className="relative shrink-0 w-24 h-28 sm:w-28 sm:h-32 rounded-2xl border border-accent/30 bg-surface overflow-hidden group/avatar">
-                  <img
+                <div className="relative shrink-0 w-24 h-28 sm:w-28 sm:h-32 rounded-2xl border border-accent/30 bg-surface overflow-hidden">
+                  <Image
                     src={assetPath("images/avatar_headshot.png")}
                     alt={profile.name}
-                    className="w-full h-full object-cover object-top scale-105 transition-transform duration-500 group-hover/avatar:scale-110"
+                    width={460}
+                    height={460}
+                    unoptimized
+                    className="h-full w-full object-cover object-top"
                   />
                   {/* Wireframe helmet overlay */}
                   

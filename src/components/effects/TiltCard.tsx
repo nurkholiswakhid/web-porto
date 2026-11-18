@@ -75,11 +75,11 @@ export default function TiltCard({
         className
       )}
       style={{
-        transformStyle: "preserve-3d",
-        perspective: "1000px",
+        transformStyle: isHovered ? "preserve-3d" : undefined,
+        perspective: isHovered ? "1000px" : undefined,
         transform: isHovered
           ? `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale3d(${scale}, ${scale}, ${scale})`
-          : "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)",
+          : undefined,
       }}
     >
       {/* 3D Child Content */}
