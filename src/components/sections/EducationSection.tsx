@@ -109,7 +109,7 @@ export default function EducationSection() {
                       {pub.venue}
                     </span>
                     <span className="font-mono text-xs text-text-dim">
-                      {pub.year}
+                      {pub.date || pub.year}
                     </span>
                   </div>
                   <h3 className="text-base font-semibold text-foreground leading-snug mb-2 group-hover:text-accent transition-colors">

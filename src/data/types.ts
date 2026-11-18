@@ -15,6 +15,7 @@ export interface Publication {
   title: string;
   venue: string; // "IEEE" | "SINTA 4"
   year: number;
+  date?: string;
   description: string;
   url?: string;
 }
