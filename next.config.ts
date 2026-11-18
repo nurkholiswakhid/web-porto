@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
   output: "export",
   trailingSlash: true,
   images: { unoptimized: true },
+  experimental: {
+    agentUpgrade: "security",
+  },
   transpilePackages: ["three", "@react-three/fiber", "@react-three/drei"],
   basePath,
   env: {

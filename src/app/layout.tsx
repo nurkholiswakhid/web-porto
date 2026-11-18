@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import AssetLoader from "@/components/effects/AssetLoader";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://nurkholiswakhid.me"),
@@ -59,12 +60,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="font-body antialiased">
+      <body className="font-body antialiased is-loading">
         {/* Skip to content link for accessibility */}
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>
-        {children}
+        <AssetLoader>{children}</AssetLoader>
       </body>
     </html>
   );
