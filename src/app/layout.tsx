@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import AssetLoader from "@/components/effects/AssetLoader";
 
@@ -66,6 +67,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <AssetLoader>{children}</AssetLoader>
+        <Analytics />
       </body>
     </html>
   );
