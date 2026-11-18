@@ -126,22 +126,30 @@ export default function AssetLoader({
           aria-live="polite"
           aria-label={`Loading portfolio, ${progress} percent`}
         >
-          <div className="asset-loader__grid" aria-hidden="true" />
           <div className="asset-loader__content">
-            <div className="asset-loader__mark" aria-hidden="true">
-              <span />
-              <span />
-              <span />
+            <div className="asset-loader__identity">
+              <div className="asset-loader__mark" aria-hidden="true">
+                N<span />
+              </div>
+              <p className="asset-loader__name">
+                Nur Kholis <span>Wakhid</span>
+              </p>
             </div>
-            <p className="asset-loader__name">Nur Kholis Wakhid</p>
-            <div className="asset-loader__track">
+            <div
+              className="asset-loader__track"
+              role="progressbar"
+              aria-label="Loading portfolio assets"
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-valuenow={progress}
+            >
               <div
                 className="asset-loader__fill"
                 style={{ width: `${progress}%` }}
               />
             </div>
             <div className="asset-loader__meta">
-              <span>Loading assets</span>
+              <span>Preparing your view</span>
               <span>{progress}%</span>
             </div>
           </div>
