@@ -1,16 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { projects } from "@/data/projects";
 import { assetPath } from "@/lib/utils";
 
 const CRITICAL_ASSETS = [
-  "images/avatar_headshot.png",
-  "images/tubuh.png",
-  "images/helmt.png",
-  "images/profile.png",
-  "images/profile_torso.png",
-  ...projects.map((project) => project.thumbnail),
+  "images/tubuh.webp",
+  "images/helmt.webp",
 ];
 
 export default function AssetLoader({
@@ -29,32 +24,14 @@ export default function AssetLoader({
     let disposed = false;
     let finished = false;
 
-    const minimumDelay = new Promise((resolve) =>
-      window.setTimeout(resolve, 650)
+    const minimumDelay = new Promise<void>((resolve) =>
+      window.setTimeout(resolve, 250)
     );
-    const safetyTimeout = new Promise((resolve) =>
+    const safetyTimeout = new Promise<void>((resolve) =>
       window.setTimeout(resolve, 12000)
     );
 
-    const fontsReady =
-      document.fonts?.ready ??
-      Promise.resolve();
-    const windowReady =
-      document.readyState === "complete"
-        ? Promise.resolve()
-        : new Promise<void>((resolve) =>
-            window.addEventListener("load", () => resolve(), { once: true })
-          );
-
-    const urls = Array.from(
-      new Set([
-        ...CRITICAL_ASSETS.map(assetPath),
-        ...Array.from(document.images)
-          .filter((image) => image.loading !== "lazy")
-          .map((image) => image.currentSrc || image.src)
-          .filter(Boolean),
-      ])
-    );
+    const urls = CRITICAL_ASSETS.map(assetPath);
 
     let loaded = 0;
     const updateProgress = () => {
@@ -89,8 +66,6 @@ export default function AssetLoader({
 
     Promise.race([
       Promise.all([
-        fontsReady,
-        windowReady,
         Promise.all(imagePromises),
         minimumDelay,
       ]),

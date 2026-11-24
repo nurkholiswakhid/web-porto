@@ -319,7 +319,7 @@ export default function HeroSection() {
     helmetImage.onload = () => {
       needsRender = true;
     };
-    helmetImage.src = assetPath("images/helmt.png");
+    helmetImage.src = assetPath("images/helmt.webp");
 
     visual.addEventListener("pointerenter", handlePointerEnter);
     visual.addEventListener("pointermove", handlePointerMove);
@@ -519,9 +519,11 @@ export default function HeroSection() {
 
                 {/* Portrait subject remains below the masked helmet layer. */}
                 <img
-                  src={assetPath("images/tubuh.png")}
+                  src={assetPath("images/tubuh.webp")}
                   alt="Nur Kholis Wakhid — Full Stack Web Developer & SEO Specialist"
                   className="absolute inset-0 z-[2] h-full w-full object-contain lg:object-fill"
+                  fetchPriority="high"
+                  decoding="async"
                   style={{
                     maskImage:
                       "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%)",

@@ -98,7 +98,7 @@ export default function AboutSection() {
               <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 mb-5">
                 <div className="relative shrink-0 w-24 h-28 sm:w-28 sm:h-32 rounded-2xl border border-accent/30 bg-surface overflow-hidden">
                   <Image
-                    src={assetPath("images/avatar_headshot.png")}
+                    src={assetPath("images/avatar_headshot.webp")}
                     alt={profile.name}
                     width={460}
                     height={460}

@@ -601,7 +601,7 @@ export default function AstronautIntroSection() {
     };
 
     helmetImage.onload = resize;
-    helmetImage.src = assetPath("images/helmt.png");
+    helmetImage.src = assetPath("images/helmt.webp");
     const resizeObserver = new ResizeObserver(resize);
     const visibilityObserver = new IntersectionObserver(
       ([entry]) => {
@@ -936,7 +936,7 @@ export default function AstronautIntroSection() {
           className="pointer-events-auto relative z-[60] h-[min(98vw,520px)] w-[min(98vw,520px)] touch-pan-y will-change-transform lg:h-[min(126vw,760px)] lg:w-[min(98vw,880px)]"
         >
           <img
-            src={assetPath("images/tubuh.png")}
+            src={assetPath("images/tubuh.webp")}
             alt="Portrait of Nur Kholis Wakhid"
             className="absolute inset-0 z-[1] h-full w-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.65)] lg:object-fill"
             style={{
@@ -947,7 +947,7 @@ export default function AstronautIntroSection() {
             }}
           />
           <img
-            src={assetPath("images/helmt.png")}
+            src={assetPath("images/helmt.webp")}
             alt=""
             aria-hidden="true"
             className="absolute inset-0 z-[2] h-full w-full object-contain opacity-0 lg:object-fill"

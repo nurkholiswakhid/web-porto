@@ -33,7 +33,7 @@ export const experiences: Experience[] = [
     location: "Surabaya, Jawa Timur",
     start: "2024-06",
     end: "2024-09",
-    logo: "images/logo/brighton_logo.png",
+    logo: "images/logo/brighton_logo.webp",
     summary: [
       "Menerapkan SEO on-page melalui riset kata kunci, optimasi metadata, struktur heading, dan tautan internal.",
       "Mengembangkan alat otomasi Python untuk web scraping, analisis konten, dan pengolahan data SEO.",
@@ -58,7 +58,7 @@ export const experiences: Experience[] = [
     location: "Indonesia",
     start: "2024-09",
     end: "2025-01",
-    logo: "images/logo/bangkit_logo.png",
+    logo: "images/logo/bangkit_logo.webp",
     summary: [
       "Mengembangkan aplikasi Android native menggunakan Android Studio, Kotlin, Coroutines, dan Firebase.",
       "Berkolaborasi dalam proyek akhir lintas bidang yang mencakup pengembangan aplikasi mobile, machine learning, dan cloud computing.",
@@ -82,7 +82,7 @@ export const experiences: Experience[] = [
     location: "Surabaya, Jawa Timur",
     start: "2023-07",
     end: "2023-09",
-    logo: "images/logo/ids_logo.png",
+    logo: "images/logo/ids_logo.webp",
     summary: [
       "Melakukan pemeliharaan preventif dan perbaikan perangkat keras maupun perangkat lunak serta memberikan dukungan teknis kepada pengguna.",
       "Mendiagnosis dan menangani kendala jaringan, sistem operasi, dan perangkat pendukung.",

@@ -112,6 +112,7 @@ export default function ProjectsSection() {
                           alt={project.thumbnailAlt || project.title}
                           className="h-full w-full object-cover object-top"
                           loading="lazy"
+                          decoding="async"
                           onError={() => {
                             setImgErrors((prev) => ({
                               ...prev,

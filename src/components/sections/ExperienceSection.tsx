@@ -29,21 +29,21 @@ function CompanyMark({
 
   return (
     <div
-      className="relative flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-border bg-white sm:h-16 sm:w-16"
+      className="relative flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-border bg-white sm:h-14 sm:w-14"
       aria-label={`${company} logo`}
     >
       {logo && !logoFailed ? (
         <Image
           src={assetPath(logo)}
           alt={`${company} logo`}
-          width={64}
-          height={64}
+          width={56}
+          height={56}
           unoptimized
           className="h-full w-full object-contain"
           onError={() => setLogoFailed(true)}
         />
       ) : (
-        <span className="font-display text-lg font-black tracking-tight text-bg">
+        <span className="font-display text-base font-black tracking-tight text-bg">
           {fallbackMark}
         </span>
       )}
@@ -67,119 +67,128 @@ export default function ExperienceSection() {
       aria-label="Professional experience"
     >
       <div className="section-container">
-        <div className="reveal mb-12">
-          <div className="section-label">
-            <span className="w-1.5 h-1.5 bg-accent rounded-full" />
-            Experience
+        <div className="reveal mb-12 grid gap-5 border-b border-border/70 pb-8 md:grid-cols-[minmax(0,1fr)_20rem] md:items-end md:gap-12">
+          <div>
+            <p className="mb-3 font-mono text-xs text-accent">Career history</p>
+            <h2 className="font-display text-[clamp(2rem,5.4vw,3.8rem)] font-black leading-[0.98] tracking-[-0.045em] text-foreground">
+              Professional
+              <br />
+              <span className="text-accent">experience</span>
+            </h2>
           </div>
-          <h2 className="font-display font-black text-[clamp(2rem,5vw,3.5rem)] leading-[1.1] tracking-tight text-foreground">
-            PROFESSIONAL{" "}
-            <span className="text-accent italic">EXPERIENCE</span>
-          </h2>
-          <p className="section-subtitle mt-4">
-            Experience in web development, technical SEO, and mobile
-            application engineering.
+          <p className="max-w-sm text-sm leading-7 text-text-secondary md:justify-self-end">
+            Four roles across web development, technical SEO, mobile
+            engineering, and IT support.
           </p>
         </div>
 
         <div className="relative">
           <div
             aria-hidden="true"
-            className="absolute bottom-8 left-[0.3rem] top-4 hidden w-px bg-gradient-to-b from-accent/70 via-border to-transparent md:block"
+            className="absolute bottom-1 left-[0.6875rem] top-1 w-px bg-gradient-to-b from-accent/80 via-border to-transparent md:left-[10.5rem]"
           />
 
-          <div className="space-y-5">
-            {chronologicalExperiences.map((exp, index) => {
+          <div>
+            {chronologicalExperiences.map((exp) => {
               const isCurrent = !exp.end;
 
               return (
                 <article
                   key={`${exp.company}-${exp.start}`}
-                  className="reveal relative grid gap-3 pl-6 md:grid-cols-[10rem_minmax(0,1fr)] md:gap-8 md:pl-0"
-                  style={{ transitionDelay: `${index * 100}ms` }}
+                  className="reveal relative grid gap-3 border-b border-border/60 pb-8 pl-8 last:border-b-0 last:pb-0 md:grid-cols-[9rem_minmax(0,1fr)] md:gap-12 md:pb-10 md:pl-0 md:last:pb-0"
                 >
                   <span
                     aria-hidden="true"
-                    className="absolute left-0 top-[1.15rem] hidden h-2.5 w-2.5 rounded-full border-2 border-bg bg-accent shadow-[0_0_14px_rgba(200,255,0,0.42)] md:left-[10.3rem] md:top-8 md:block"
+                    className={`absolute left-[0.375rem] top-[0.3rem] h-2.5 w-2.5 rounded-full border-2 border-bg md:left-[10.1875rem] ${
+                      isCurrent
+                        ? "bg-accent shadow-[0_0_14px_rgba(200,255,0,0.42)]"
+                        : "bg-text-dim"
+                    }`}
                   />
 
-                  <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 pb-1 md:block md:pt-6">
-                    <p className="min-w-0 font-mono text-xs leading-relaxed text-text-secondary">
-                      {formatDate(exp.start)}
-                      <span className="mx-1.5 text-text-dim">to</span>
-                      <span className={isCurrent ? "text-accent" : "text-text-dim"}>
+                  <div className="min-w-0 md:pt-0.5 md:text-right">
+                    <p className="font-mono text-[11px] leading-5 text-text-secondary sm:text-xs">
+                      <span>{formatDate(exp.start)}</span>
+                      <span className="mx-1.5 text-text-dim" aria-hidden="true">
+                        —
+                      </span>
+                      <span
+                        className={
+                          isCurrent ? "text-accent" : "text-text-dim"
+                        }
+                      >
                         {exp.end ? formatDate(exp.end) : "Present"}
                       </span>
                     </p>
                     {isCurrent && (
-                      <span className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap font-mono text-[9px] uppercase tracking-wider text-accent md:mt-2">
-                        <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                        Current
+                      <span className="mt-1 inline-flex items-center gap-1.5 font-mono text-[10px] text-accent">
+                        Current role
                       </span>
                     )}
                   </div>
 
-                  <div className="group relative min-w-0 rounded-2xl border border-border bg-surface/60 transition-colors duration-300 hover:border-accent/35 hover:bg-surface/90">
-                    <div className="min-w-0 p-4 sm:p-6">
-                      <div className="flex min-w-0 items-start gap-3 sm:gap-4">
-                        <CompanyMark
-                          company={exp.company}
-                          logo={exp.logo}
-                          logoMark={exp.logoMark}
-                        />
-                        <div className="min-w-0">
-                          <p className="mb-1 break-words text-sm font-semibold text-accent">
-                            {exp.company}
-                          </p>
-                          <h3 className="break-words font-display text-lg font-bold leading-snug text-foreground sm:text-xl">
-                            {exp.role}
-                          </h3>
-                          <p className="mt-1 flex items-center gap-1.5 text-xs text-text-dim">
-                            <MapPin className="h-3 w-3 shrink-0" />
-                            {exp.location}
-                          </p>
-                        </div>
-                      </div>
-
-                      <ul className="mt-5 max-w-4xl space-y-2.5 border-t border-border/70 pt-4">
-                        {exp.summary.map((item, i) => (
-                          <li
-                            key={i}
-                            className="flex items-start gap-2.5 text-sm leading-relaxed text-text-secondary"
-                          >
-                            <span className="mt-[0.55rem] h-1 w-1 shrink-0 bg-accent/80" />
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-
-                      {exp.achievements && exp.achievements.length > 0 && (
-                        <div className="mt-4 max-w-4xl border-l-2 border-accent/60 pl-3">
-                          {exp.achievements.map((achievement, i) => (
-                            <p
-                              key={i}
-                              className="text-xs leading-relaxed text-foreground/80"
-                            >
-                              {achievement}
-                            </p>
-                          ))}
-                        </div>
-                      )}
-
-                      <div className="mt-5 border-t border-border/70 pt-4">
-                        <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.16em] text-text-dim">
-                          Tools & skills
+                  <div className="min-w-0">
+                    <div className="flex min-w-0 items-start gap-3 sm:gap-4">
+                      <CompanyMark
+                        company={exp.company}
+                        logo={exp.logo}
+                        logoMark={exp.logoMark}
+                      />
+                      <div className="min-w-0 flex-1 pt-0.5">
+                        <p className="break-words text-sm font-semibold text-accent">
+                          {exp.company}
                         </p>
-                        <div className="flex flex-wrap gap-1.5">
-                          {exp.tools.map((tool) => (
-                            <span
-                              key={tool}
-                              className="max-w-full break-words border border-border/80 px-2 py-1 text-[10px] leading-tight text-text-secondary transition-colors group-hover:border-accent/25"
-                            >
-                              {tool}
-                            </span>
-                          ))}
-                        </div>
+                        <h3 className="mt-1 break-words font-display text-lg font-bold leading-snug text-foreground sm:text-xl">
+                          {exp.role}
+                        </h3>
+                        <p className="mt-2 flex items-center gap-1.5 text-xs text-text-dim">
+                          <MapPin className="h-3 w-3 shrink-0" />
+                          {exp.location}
+                        </p>
+                      </div>
+                    </div>
+
+                    <ul className="mt-5 grid gap-x-8 gap-y-3 border-t border-border/70 pt-4 md:grid-cols-2">
+                      {exp.summary.map((item) => (
+                        <li
+                          key={item}
+                          className="flex items-start gap-2.5 text-sm leading-6 text-text-secondary"
+                        >
+                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent/80" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+
+                    {exp.achievements && exp.achievements.length > 0 && (
+                      <div className="mt-5 max-w-4xl border-l-2 border-accent/70 pl-3.5">
+                        <p className="mb-1 font-mono text-[10px] text-accent">
+                          Highlight
+                        </p>
+                        {exp.achievements.map((achievement) => (
+                          <p
+                            key={achievement}
+                            className="text-xs leading-5 text-foreground/80"
+                          >
+                            {achievement}
+                          </p>
+                        ))}
+                      </div>
+                    )}
+
+                    <div className="mt-5 flex flex-wrap items-center gap-2 border-t border-border/70 pt-4">
+                      <span className="mr-1 text-xs text-text-dim">
+                        Tools &amp; skills
+                      </span>
+                      <div className="flex flex-wrap gap-1.5">
+                        {exp.tools.map((tool) => (
+                          <span
+                            key={tool}
+                            className="max-w-full break-words rounded-full border border-border/80 bg-bg-secondary/60 px-2.5 py-1 text-[10px] leading-tight text-text-secondary"
+                          >
+                            {tool}
+                          </span>
+                        ))}
                       </div>
                     </div>
                   </div>
